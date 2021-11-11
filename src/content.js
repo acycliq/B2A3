@@ -9,4 +9,6 @@ function iniContent(spots, cells) {
     // SCENE.add(INSTANCEDMESH.back_face.instancedMesh); // needs to be rendered first
     // SCENE.add(INSTANCEDMESH.front_face.instancedMesh);
 
+    load_dapi()
+
 }

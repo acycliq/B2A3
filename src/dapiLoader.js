@@ -44,5 +44,5 @@ function load_dapi() {
             stackHelper, 'index', 0, stack.dimensionsIJK.z - 1).step(1).listen();
     }
 
-
+    console.log('load_dapi loaded')
 }

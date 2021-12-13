@@ -22,72 +22,10 @@
     <!--This is important to get a correct canvas size on mobile-->
     <meta name='viewport' content='width=device-width, user-scalable=no'/>
 
-    <!-- TinyColor -->
-    <script src="src/lib/js/tinycolor.js"></script>
-
-    <!--jquery -->
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="src/lib/css/bootstrap.min.css">
-    <script src="src/lib/js/bootstrap.min.js"></script>
-
-    <!--d3 -->
-    <script src='https://d3js.org/d3.v4.min.js'></script>
-
-    <!-- leaflet v 1.0.3 -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.7.0/Tween.js"></script>
-
-<!--    rbush3d-->
-    <script src="https://unpkg.com/rbush-3d@0.0.4/dist/rbush3d.min.js"></script>
-
-    <script src="https://twgljs.org/dist/4.x/twgl-full.min.js"></script>
-
-<!--    <script src='https://threejs.org/build/three.min.js'></script>-->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.min.js"></script>
-    <script src='https://threejs.org/examples/js/controls/OrbitControls.js'></script>
-    <script src="three.js/examples/js/loaders/RGBELoader.js"></script>
-<!--    <script src="three.js/examples/js/libs/dat.gui.min.js"></script>-->
-<!--    <script src="three.js/examples/js/libs/stats.min.js"></script>-->
-
-    <script type="text/javascript" src="https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js"></script>
-    <script type="text/javascript" src="https://cdn.rawgit.com/mrdoob/stats.js/master/build/stats.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.16.0/polyfill.min.js"></script>
-    <!-- AMI CDN -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ami.js//0.0.20/ami.min.js"></script>
-    <!--    <script src='three.js/examples/js/controls/PointerLockControls.js'></script>-->
-
-    <link rel="stylesheet" href="src/lib/css/index.css">
-    <script src="src/index.js"></script>
-
-    <link rel="stylesheet" href="src/lib/css/progress.css">
-    <script src="src/lib/js/progress.js"></script>
-    <script src="src/globals.js"></script>
-    <script src="src/utils.js"></script>
-    <script src="src/glyphPaths.js"></script>
-    <script src="src/glyphConfig.js"></script>
-    <script src="src/classColors.js"></script>
-    <script src="src/particles.js"></script>
-    <script src="src/dataLoader.js"></script>
-    <script src="src/config.js"></script>
-    <script src="src/scene.js"></script>
-    <script src="src/content.js"></script>
-    <script src="src/sphere_data.js"></script>
-    <script src="src/sphere_sim_data.js"></script>
-    <script src="src/cell_maker.js"></script>
-    <script src="src/app.js"></script>
-    <script src="src/dapiLoader.js"></script>
-    <script src="src/lights.js"></script>
-    <script src="src/shaders/glyphs/vertex.js"></script>
-    <script src="src/shaders/glyphs/fragment.js"></script>
-    <script src="src/animation_loop.js"></script>
-    <script src="src/post_scene.js"></script>
-
     <style>
-        button, input, optgroup, select, textarea {color: #1b1b1b;}
+        button, input, optgroup, select, textarea {
+            color: #1b1b1b;
+        }
 
         #my-gui-container {
             position: fixed;
@@ -96,10 +34,76 @@
             z-index: 1;
         }
     </style>
-
-
 </head>
 <body>
+
+
+<!-- TinyColor -->
+<script src="src/lib/js/tinycolor.js"></script>
+
+<!--jquery -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
+<!-- bootstrap -->
+<link rel="stylesheet" href="src/lib/css/bootstrap.min.css">
+<script src="src/lib/js/bootstrap.min.js"></script>
+
+<!--d3 -->
+<script src='https://d3js.org/d3.v4.min.js'></script>
+
+<!-- leaflet v 1.0.3 -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.7.0/Tween.js"></script>
+
+<!--    rbush3d-->
+<script src="https://unpkg.com/rbush-3d@0.0.4/dist/rbush3d.min.js"></script>
+
+<script src="https://twgljs.org/dist/4.x/twgl-full.min.js"></script>
+
+<!--    <script src='https://threejs.org/build/three.min.js'></script>-->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r124/three.js"></script>
+<script src='https://threejs.org/examples/js/controls/OrbitControls.js'></script>
+<script src="three.js/examples/js/loaders/RGBELoader.js"></script>
+<!--    <script src="three.js/examples/js/libs/dat.gui.min.js"></script>-->
+<!--    <script src="three.js/examples/js/libs/stats.min.js"></script>-->
+
+<script type="text/javascript" src="https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/mrdoob/stats.js/master/build/stats.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.16.0/polyfill.min.js"></script>
+<!-- AMI CDN -->
+<script type="text/javascript" src="src/ami.min.js"></script>
+<!--    <script src='three.js/examples/js/controls/PointerLockControls.js'></script>-->
+
+<link rel="stylesheet" href="src/lib/css/index.css">
+<script src="src/index.js"></script>
+
+<link rel="stylesheet" href="src/lib/css/progress.css">
+<script src="src/lib/js/progress.js"></script>
+<script src="src/globals.js"></script>
+<script src="src/utils.js"></script>
+<script src="src/glyphPaths.js"></script>
+<script src="src/glyphConfig.js"></script>
+<script src="src/classColors.js"></script>
+<script src="src/particles.js"></script>
+<script src="src/dataLoader.js"></script>
+<script src="src/config.js"></script>
+<script src="src/scene.js"></script>
+<script src="src/content.js"></script>
+<script src="src/sphere_data.js"></script>
+<script src="src/sphere_sim_data.js"></script>
+<script src="src/cell_maker.js"></script>
+<script src="src/app.js"></script>
+<script src="src/dapiLoader.js"></script>
+<script src="src/lights.js"></script>
+<script src="src/shaders/glyphs/vertex.js"></script>
+<script src="src/shaders/glyphs/fragment.js"></script>
+<script src="src/animation_loop.js"></script>
+<script src="src/post_scene.js"></script>
+<script src="src/wDapiLoader.js"></script>
+<script src="src/dapiloaderWorker.js"></script>
 
 
 <div class="container-fluid aligned-middle stack-top" id="preloader">
@@ -144,7 +148,10 @@
     localStorage.clear();
     console.log('Local storage cleared');
 
-    window.onload = run();
+    // window.onload = run();
+    $(document).ready(function () {
+        run();
+    })
 
     function removePreloader() {
         $('#preloader').delay(350).fadeOut(250); // will fade out the white DIV that covers the website.

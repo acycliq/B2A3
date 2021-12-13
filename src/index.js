@@ -2,6 +2,7 @@
 function run() {
     console.log('app starts');
     CONFIGSETTINGS = config().get('default');
+    loadImage()
 
     fetcher([encode(CONFIGSETTINGS.geneData)]).then(
         result => make_package(result),

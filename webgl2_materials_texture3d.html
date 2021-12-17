@@ -35,7 +35,7 @@
 
 	void main() {
 
-		vec4 color = texture( diffuse, vec3( vUv.xy, 0.0 ) );
+		vec4 color = texture( diffuse, vec3( vUv, depth ) );
 
 		// lighten a bit
 		outColor = vec4( color.rrr * 1.5, 1.0 );
@@ -68,8 +68,8 @@
 
 			let camera, scene, mesh, renderer, stats;
 
-			const planeWidth = 968/65;
-			const planeHeight = 1271/65;
+			const planeWidth = 50;
+			const planeHeight = 50;
 
 			let depthStep = 0.4;
 
@@ -90,13 +90,12 @@
 
 				new THREE.FileLoader()
 					.setResponseType( 'arraybuffer' )
-						// .load( './three.js/examples/textures/3d/head256x256x109.zip', function ( data ) {
-					.load( './filename_1.zip', function ( data ) {
+					.load( './three.js/examples/textures/3d/head256x256x109.zip', function ( data ) {
 
 						const zip = unzipSync( new Uint8Array( data ) );
-						const array = new Uint8Array( zip[ 'filename' ].buffer );
+						const array = new Uint8Array( zip[ 'head256x256x109' ].buffer );
 
-						const texture = new THREE.DataTexture2DArray( array, 1271, 968, 1);
+						const texture = new THREE.DataTexture2DArray( array, 256, 256, 109 );
 						texture.format = THREE.RedFormat;
 						texture.type = THREE.UnsignedByteType;
 
@@ -161,7 +160,7 @@
 
 					}
 
-					mesh.material.uniforms[ "depth" ].value = 1;
+					mesh.material.uniforms[ "depth" ].value = value;
 
 				}
 

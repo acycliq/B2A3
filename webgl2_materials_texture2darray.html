@@ -1,4 +1,11 @@
 <!--FROM webgl2_materials_texture2darray-->
+
+<!--To use your own multi-page tif file do the following to convert the image to a byte stream-->
+<!--image = skimage.io.imread('some_image.tif')-->
+<!--image.astype('uint8').tofile('filename')-->
+<!--image must be in the format N-height-width-->
+<!--The you have to zip it and feed it to the loader-->
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -92,12 +99,12 @@
 				new THREE.FileLoader()
 					.setResponseType( 'arraybuffer' )
 					// .load( './three.js/examples/textures/3d/head256x256x109.zip', function ( data ) {
-						.load( './filename_1.zip', function ( data ) {
+						.load( './filename.zip', function ( data ) {
 
 						const zip = unzipSync( new Uint8Array( data ) );
 						const array = new Uint8Array( zip[ 'filename' ].buffer );
 
-						const texture = new THREE.DataTexture2DArray( array, 968, 1271, 1 );
+						const texture = new THREE.DataTexture2DArray( array, 968, 1271, 71); // width, height, stack_size
 						texture.format = THREE.RedFormat;
 						texture.type = THREE.UnsignedByteType;
 

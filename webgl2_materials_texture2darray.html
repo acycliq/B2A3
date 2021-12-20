@@ -69,10 +69,10 @@
 
 			let camera, scene, mesh, renderer, stats;
 
-			const planeWidth = 50;
-			const planeHeight = 50;
+			const planeWidth = 968/60;
+			const planeHeight = 1271/60;
 
-			let depthStep = 0.4;
+			let depthStep = 1;
 
 			init();
 			animate();
@@ -91,12 +91,13 @@
 
 				new THREE.FileLoader()
 					.setResponseType( 'arraybuffer' )
-					.load( './three.js/examples/textures/3d/head256x256x109.zip', function ( data ) {
+					// .load( './three.js/examples/textures/3d/head256x256x109.zip', function ( data ) {
+						.load( './filename_1.zip', function ( data ) {
 
 						const zip = unzipSync( new Uint8Array( data ) );
-						const array = new Uint8Array( zip[ 'head256x256x109' ].buffer );
+						const array = new Uint8Array( zip[ 'filename' ].buffer );
 
-						const texture = new THREE.DataTexture2DArray( array, 256, 256, 109 );
+						const texture = new THREE.DataTexture2DArray( array, 968, 1271, 1 );
 						texture.format = THREE.RedFormat;
 						texture.type = THREE.UnsignedByteType;
 

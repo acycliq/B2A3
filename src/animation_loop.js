@@ -2,8 +2,48 @@
 
 function animate() {
     requestAnimationFrame(animate);
+    mouseover();
     render();
     stats.update();
+}
+
+var PARTICLE_ID;
+var LAST_COLOUR = {r:null, g:null, b:null};
+var LAST_OBJ;
+var LAST_POINT = null;
+var hoveredObjects = {};
+var hoveredObjectUuids;
+function mouseover() {
+    RAYCASTER.setFromCamera(MOUSE, CAMERA);
+    // raycaster.far = 100;
+    var target = SCENE.children.filter(d => (d.type === 'Points') & (d.visible));
+    const intersects = RAYCASTER.intersectObjects(target, true);
+
+    if (intersects.length && MOUSE.x) {
+        $('html,body').css('cursor', 'pointer');
+        // collect array of uuids of currently hovered objects
+        hoveredObjectUuids = intersects.map(el => el.object.uuid);
+        var hoveredObj = intersects[0].object;
+        //if same point do nothing
+        if (hoveredObjects[hoveredObj.uuid]) {
+            console.log('this object was hovered and still hovered')
+        }
+
+        // collect hovered object
+        hoveredObjects[hoveredObj.uuid] = hoveredObj;
+        console.log('Hovering a new object')
+    }
+    else {
+        for (let uuid of Object.keys(hoveredObjects)) {
+            $('html,body').css('cursor', 'default');
+            let idx = hoveredObjectUuids.indexOf(uuid);
+            if (idx === -1) {
+                // object with given uuid was unhovered
+                let unhoveredObj = hoveredObjects[uuid];
+                delete hoveredObjects[uuid];
+            }
+        }
+    }
 }
 
 function setInstanceColor(instanceId, isHighlighting) {

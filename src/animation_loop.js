@@ -21,7 +21,6 @@ function mouseover() {
         var gene = hoveredObj.name,
             id = intersects[0].index;
         if (hoveredObjects['gene'] === gene && hoveredObjects['id'] === id) {
-            var xxx = 1
             // console.log('This spot has been hovered again')
         } else {
             // remove the old before adding the new

@@ -30,7 +30,7 @@ function app(geneData) {
     iniLights();
     iniContent(SPOTS_ARR, CELLS_ARR);
 
-    RAYCASTER.params.Points.threshold = 3;
+    // RAYCASTER.params.Points.threshold = 3;
     // window.addEventListener('mousemove', onMouseMove, false);
 
     animate();

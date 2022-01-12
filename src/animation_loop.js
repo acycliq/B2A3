@@ -7,13 +7,8 @@ function animate() {
     stats.update();
 }
 
-var PARTICLE_ID;
-var LAST_COLOUR = {r:null, g:null, b:null};
-var LAST_OBJ;
-var LAST_POINT = null;
-var hoveredObjects = {};
-var hoveredColours = {}
-var hoveredObjectUuids;
+// var hoveredObjects = {};
+
 function mouseover() {
     RAYCASTER.setFromCamera(MOUSE, CAMERA);
     // raycaster.far = 100;
@@ -22,47 +17,31 @@ function mouseover() {
 
     if (intersects.length && MOUSE.x) {
         $('html,body').css('cursor', 'pointer');
-        // collect array of uuids of currently hovered objects
-        // hoveredObjectUuids = intersects.map(el => el.object.uuid);
-        hoveredObjectUuids = intersects[0].object.uuid
         var hoveredObj = intersects[0].object;
-        //if same point do nothing
-        if (hoveredObjects[hoveredObj.uuid]) {
-            console.log('this object was hovered and still hovered. r: ' + hoveredObjects[hoveredObj.uuid].material.uniforms.r.value
-                + ' g: '+ + hoveredObjects[hoveredObj.uuid].material.uniforms.g.value
-                + ' b: '+ + hoveredObjects[hoveredObj.uuid].material.uniforms.b.value)
+        var gene = hoveredObj.name,
+            id = intersects[0].index;
+        if (hoveredObjects['gene'] === gene && hoveredObjects['id'] === id) {
+            var xxx = 1
+            // console.log('This spot has been hovered again')
+        } else {
+            // remove the old before adding the new
+            SCENE.children.filter(d => d.uuid === hoveredObjects['uuid']).forEach(d => SCENE.remove(d));
+            h = highlighter(gene, id);
+            hoveredObjects['gene'] = gene;
+            hoveredObjects['id'] = id;
+            hoveredObjects['uuid'] = h.uuid;
+            SCENE.add(h);
+            console.log('Added highlighing for uuid: ' + h.uuid);
         }
-        else {
-            // collect hovered object
-            hoveredColours = {};
+    } else {
+        $('html,body').css('cursor', 'default');
+        if (hoveredObjects['gene']) {
+            SCENE.children.filter(d => d.uuid === hoveredObjects['uuid']).forEach(d => SCENE.remove(d));
+            console.log('removed uuid: ' + hoveredObjects['uuid']);
+            delete hoveredObjects['gene'];
+            delete hoveredObjects['id'];
+            delete hoveredObjects['uuid'];
             hoveredObjects = {};
-            hoveredObjects[hoveredObj.uuid] = hoveredObj;
-            hoveredColours[hoveredObj.uuid] = {
-                r: hoveredObj.material.uniforms.r.value,
-                g: hoveredObj.material.uniforms.g.value,
-                b: hoveredObj.material.uniforms.b.value
-            };
-            hoveredObj.material.uniforms.r.value = 0.5
-            hoveredObj.material.uniforms.g.value = 0.5
-            hoveredObj.material.uniforms.b.value = 0.5
-            console.log('Hovering a new object')
-        }
-    }
-    else {
-        for (let uuid of Object.keys(hoveredObjects)) {
-            $('html,body').css('cursor', 'default');
-            let idx = hoveredObjectUuids.indexOf(uuid);
-            // object with given uuid was unhovered
-            let unhoveredObj = hoveredObjects[uuid];
-            console.log('Last visited colour was: r:' + hoveredColours[uuid].r +
-                ', g:' + hoveredColours[uuid].g +
-                ', b:' + hoveredColours[uuid].b);
-            hoveredObjects[uuid].material.uniforms.r.value = hoveredColours[uuid].r;
-            hoveredObjects[uuid].material.uniforms.g.value = hoveredColours[uuid].g;
-            hoveredObjects[uuid].material.uniforms.b.value = hoveredColours[uuid].b;
-
-            delete hoveredObjects[uuid];
-            console.log('removed');
         }
     }
 }

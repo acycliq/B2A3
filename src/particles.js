@@ -1,8 +1,12 @@
-function my_particles(positions, gene) {
-    console.log('Doing particles for ' + gene)
+function my_particles(positions, gene, hexCode=null) {
+    // positions = positions.slice(0, 3);
+    console.log('Doing particles for ' + gene);
 
-    var glyph = getGlyph(gene),
+    var glyph = getGlyph(gene);
+    if (!hexCode){
         hexCode = getColor(gene);
+    }
+
 
     var fShader = getShader(glyph),
         color = hexToRgb(hexCode);
@@ -54,10 +58,10 @@ function my_particles(positions, gene) {
     });
 
     // Points
-    PARTICLES = new THREE.Points(particlesGeometry, particlesMaterial);
-    PARTICLES.name = gene;
+    var particles = new THREE.Points(particlesGeometry, particlesMaterial);
+    particles.name = gene;
 
-    return PARTICLES
+    return particles
 }
 
 function hideParticles(gene){
@@ -124,4 +128,14 @@ function my_sphere(radius, position, color) {
     });
     let mesh = new THREE.Mesh(geometry, material);
     return mesh;
+}
+
+function highlighter(gene, id){
+    // get the spots from that specific gene only
+    var spots = SPOTS_ARR[GENEPANEL.indexOf(gene)];
+
+    // get the coords of the spot to be highlighted
+    var coords = spots.slice(3*id, 3*id+3);
+
+    return my_particles(coords, gene, '#FFFF00')
 }

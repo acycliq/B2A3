@@ -19,6 +19,7 @@ var CAMERA = null,
     INTERSECTED = {
         index: null,
         name: null,
+        uuid: null,
     },
     PARTICLE_SIZE = 1.0,
     hoveredObjects = {};

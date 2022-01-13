@@ -104,11 +104,17 @@ function render() {
 
 
             if (INTERSECTED.index != intersects[0].index && INTERSECTED.name != intersects[0].object.name) {
+                if (INTERSECTED.uuid){
+                    var previous_particles = SCENE.children.filter(d => (d.type === 'Points') & (d.uuid === INTERSECTED.uuid))[0];
+                    previous_particles.geometry.attributes.size.array[INTERSECTED.index] = PARTICLE_SIZE;
+                    previous_particles.geometry.attributes.size.needsUpdate = true;
+                }
 
-                attributes.size.array[INTERSECTED] = PARTICLE_SIZE;
+                attributes.size.array[INTERSECTED.index] = PARTICLE_SIZE;
 
                 INTERSECTED.index = intersects[0].index;
                 INTERSECTED.name = intersects[0].object.name;
+                INTERSECTED.uuid = intersects[0].object.uuid;
 
                 attributes.size.array[INTERSECTED.index] = PARTICLE_SIZE * 1.25;
                 attributes.size.needsUpdate = true;
@@ -122,6 +128,7 @@ function render() {
         attributes.size.needsUpdate = true;
         INTERSECTED.index = null;
         INTERSECTED.name = null;
+        INTERSECTED.uuid = null;
     }
 
     RENDERER.render(SCENE, CAMERA);

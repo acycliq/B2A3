@@ -14,12 +14,13 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
+varying vec3 vColor;
 
 void main() {
   // gl_FragColor = vec4(1.0, 1.0, 0.0, 0.5);
   if (view.z > zThres){
     // points at the far back
-    gl_FragColor = vec4(r, g, b, a);
+    gl_FragColor = vec4(vColor.r, vColor.g, vColor.b, a);
   }
   else {
     float diag_1 = 1.0 - lineSegment(gl_PointCoord, vec2(0.30, 0.30), vec2(0.70, 0.70));
@@ -32,7 +33,7 @@ void main() {
     
     float shaper = plus + cross;
 
-    gl_FragColor = vec4(vec3(shaper) * vec3(r, g, b), a);
+    gl_FragColor = vec4(vec3(shaper) * vColor, a);
     if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b == 0.0) discard;
   }
 }

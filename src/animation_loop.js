@@ -108,9 +108,22 @@ function render() {
                     var previous_particles = SCENE.children.filter(d => (d.type === 'Points') & (d.uuid === INTERSECTED.uuid))[0];
                     previous_particles.geometry.attributes.size.array[INTERSECTED.index] = PARTICLE_SIZE;
                     previous_particles.geometry.attributes.size.needsUpdate = true;
+
+                    previous_particles.geometry.attributes.mycolor.array[3 * INTERSECTED.index] = INTERSECTED.rgb[0];
+                    previous_particles.geometry.attributes.mycolor.array[3 * INTERSECTED.index + 1] = INTERSECTED.rgb[1];
+                    previous_particles.geometry.attributes.mycolor.array[3 * INTERSECTED.index + 2] = INTERSECTED.rgb[2];
+                    previous_particles.geometry.attributes.mycolor.needsUpdate = true;
                 }
 
                 attributes.size.array[INTERSECTED.index] = PARTICLE_SIZE;
+                INTERSECTED.rgb = [attributes.mycolor.array[3 * intersects[0].index],
+                    attributes.mycolor.array[3 * intersects[0].index + 1],
+                    attributes.mycolor.array[3 * intersects[0].index + 2],
+                    ];
+                attributes.mycolor.array[3 * intersects[0].index] = 255;
+                attributes.mycolor.array[3 * intersects[0].index + 1] = 255;
+                attributes.mycolor.array[3 * intersects[0].index + 2] = 0;
+                attributes.mycolor.needsUpdate = true;
 
                 INTERSECTED.index = intersects[0].index;
                 INTERSECTED.name = intersects[0].object.name;
@@ -119,6 +132,7 @@ function render() {
                 attributes.size.array[INTERSECTED.index] = PARTICLE_SIZE * 1.25;
                 attributes.size.needsUpdate = true;
 
+
             }
 
         }
@@ -126,9 +140,16 @@ function render() {
         $('html,body').css('cursor', 'default');
         attributes.size.array[INTERSECTED.index] = PARTICLE_SIZE;
         attributes.size.needsUpdate = true;
+
+        attributes.mycolor.array[3 * INTERSECTED.index] = INTERSECTED.rgb[0];
+        attributes.mycolor.array[3 * INTERSECTED.index + 1] = INTERSECTED.rgb[1];
+        attributes.mycolor.array[3 * INTERSECTED.index + 2] = INTERSECTED.rgb[2];
+        attributes.mycolor.needsUpdate = true;
+
         INTERSECTED.index = null;
         INTERSECTED.name = null;
         INTERSECTED.uuid = null;
+        INTERSECTED.rgb = null;
     }
 
     RENDERER.render(SCENE, CAMERA);

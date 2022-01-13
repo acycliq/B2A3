@@ -2,7 +2,7 @@
 
 function animate() {
     requestAnimationFrame(animate);
-    mouseover();
+    // mouseover();
     render();
     stats.update();
 }
@@ -74,7 +74,7 @@ function setHightlightSphere(instanceId, isHighlighting) {
     var coords = CELLS_ARR[instanceId].position,
         scales = CELLS_ARR[instanceId].scale,
         rot = CELLS_ARR[instanceId].rotation,
-        color = new THREE.Color("yellow");;
+        color = new THREE.Color("yellow");
     dummy.position.set(coords.x, coords.y, coords.z);
     dummy.scale.set(scales.x, scales.y, scales.z);
     dummy.rotation.set(rot.x, rot.y, rot.z);
@@ -88,6 +88,41 @@ function setHightlightSphere(instanceId, isHighlighting) {
     // instancedMesh.geometry.setScaleAt(i, uScale ? ss : trsCache[i].scale);
 }
 
+var attributes
 function render() {
+    RAYCASTER.setFromCamera(MOUSE, CAMERA);
+
+    var target = SCENE.children.filter(d => (d.type === 'Points') & (d.visible));
+    const intersects = RAYCASTER.intersectObjects(target, true);
+
+    if (intersects.length > 0) {
+        var particles = SCENE.children.filter(d => (d.type === 'Points') & (d.visible) & (d.name === intersects[0].object.name))[0]
+        if (particles) {
+            $('html,body').css('cursor', 'pointer');
+            var geometry = particles.geometry;
+            attributes = geometry.attributes;
+
+
+            if (INTERSECTED.index != intersects[0].index && INTERSECTED.name != intersects[0].object.name) {
+
+                attributes.size.array[INTERSECTED] = PARTICLE_SIZE;
+
+                INTERSECTED.index = intersects[0].index;
+                INTERSECTED.name = intersects[0].object.name;
+
+                attributes.size.array[INTERSECTED.index] = PARTICLE_SIZE * 1.25;
+                attributes.size.needsUpdate = true;
+
+            }
+
+        }
+    } else if (INTERSECTED.index !== null && attributes) {
+        $('html,body').css('cursor', 'default');
+        attributes.size.array[INTERSECTED.index] = PARTICLE_SIZE;
+        attributes.size.needsUpdate = true;
+        INTERSECTED.index = null;
+        INTERSECTED.name = null;
+    }
+
     RENDERER.render(SCENE, CAMERA);
 }

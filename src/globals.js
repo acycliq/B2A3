@@ -11,9 +11,14 @@ var CAMERA = null,
     legend_added = false, //used to make sure the listener is attached only once
     GENEPANEL = null,
     INSTANCEDMESH = null,
-    // PARTICLES = null,
+    PARTICLES = null,
     // PREV_INSTANCE_ID = -1,
     MOUSE = new THREE.Vector2(),
     RAYCASTER = new THREE.Raycaster(),
     COLOR = new THREE.Color(),
+    INTERSECTED = {
+        index: null,
+        name: null,
+    },
+    PARTICLE_SIZE = 1.0,
     hoveredObjects = {};

@@ -13,10 +13,10 @@ function my_particles(positions, gene, hexCode=null) {
 
     var particlesGeometry = new THREE.BufferGeometry();
     particlesGeometry.name = gene
-    // var scales = new Float32Array(positions.length);
+    var sizes = new Float32Array(positions.length/3);
     var colors = new Float32Array(positions.length);
-    for (let i = 0; i < positions.length; i++) {
-        // scales[i] = 10;
+    for (let i = 0; i < positions.length; i += 3) {
+        sizes[i/3] = PARTICLE_SIZE;
         colors[i] = color.r;
         colors[i + 1] = color.g;
         colors[i + 2] = color.b;
@@ -24,8 +24,8 @@ function my_particles(positions, gene, hexCode=null) {
 
     // const mypositions = new Float32Array([0,0,1.5]) ;
     particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-    // particleGeometry.setAttribute( 'color', new THREE.BufferAttribute( colors, 3 ) );
-    // particleGeometry.setAttribute('scale', new THREE.BufferAttribute(scales, 3));
+    particlesGeometry.setAttribute( 'mycolor', new THREE.BufferAttribute( colors, 3 ) );
+    particlesGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
     var numVertices = particlesGeometry.attributes.position.count;
     var scales = new Float32Array(numVertices * 1);
@@ -58,10 +58,10 @@ function my_particles(positions, gene, hexCode=null) {
     });
 
     // Points
-    var particles = new THREE.Points(particlesGeometry, particlesMaterial);
-    particles.name = gene;
+    PARTICLES = new THREE.Points(particlesGeometry, particlesMaterial);
+    PARTICLES.name = gene;
 
-    return particles
+    return PARTICLES
 }
 
 function hideParticles(gene){

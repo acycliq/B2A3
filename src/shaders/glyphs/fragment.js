@@ -56,19 +56,20 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
+varying vec3 vColor;
 
 void main() {
   // gl_FragColor = vec4(1.0, 1.0, 0.0, 0.5);
   if (view.z > zThres){
     // points at the far back
-    gl_FragColor = vec4(r, g, b, a);
+    gl_FragColor = vec4(vColor.r, vColor.g, vColor.b, a);
   }
   else {
     float circle_1 = draw_circle(gl_PointCoord, 0.5);
     float circle_2 = 1.0 - draw_circle(gl_PointCoord, 0.4);
     vec3 color = vec3(circle_1 * circle_2);
 
-    gl_FragColor = vec4(color  * vec3(r, g, b), a);
+    gl_FragColor = vec4(color  * vColor, a);
     if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b == 0.0) discard;
   }  
 }
@@ -90,12 +91,13 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
+varying vec3 vColor;
 
 void main() {
   // gl_FragColor = vec4(1.0, 1.0, 0.0, 0.5);
   if (view.z > zThres){
     // points at the far back
-    gl_FragColor = vec4(r, g, b, a);
+    gl_FragColor = vec4(vColor.r, vColor.g, vColor.b, a);
   }
   else {
     
@@ -104,7 +106,7 @@ void main() {
     
     float shaper = diag_1 + diag_2;
 
-    gl_FragColor = vec4(vec3(shaper) * vec3(r, g, b), a);
+    gl_FragColor = vec4(vec3(shaper) * vColor, a);
     if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b == 0.0) discard;
   }  
 }
@@ -126,12 +128,13 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
+varying vec3 vColor;
 
 void main() {
   // gl_FragColor = vec4(1.0, 1.0, 0.0, 0.5);
   if (view.z > zThres){
     // points at the far back
-    gl_FragColor = vec4(r, g, b, a);
+    gl_FragColor = vec4(vColor.r, vColor.g, vColor.b, a);
   }
   else {
     float side_1 = 1.0 - lineSegment(gl_PointCoord, vec2(0.5, 0.05), vec2(0.9, 0.5));
@@ -141,7 +144,7 @@ void main() {
     
     float shaper = side_1 + side_2 + side_3 + side_4;
 
-    gl_FragColor = vec4(vec3(shaper) * vec3(r, g, b), a);
+    gl_FragColor = vec4(vec3(shaper) * vColor, a);
     if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b == 0.0) discard;
   }
 }
@@ -164,19 +167,20 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
+varying vec3 vColor;
 
 void main() {
   // gl_FragColor = vec4(1.0, 1.0, 0.0, 0.5);
   if (view.z > zThres){
     // points at the far back
-    gl_FragColor = vec4(r, g, b, a);
+    gl_FragColor = vec4(vColor.r, vColor.g, vColor.b, a);
   }
   else {
     float circle_1 = draw_circle(gl_PointCoord, 0.25);
     float circle_2 = 1.0 - draw_circle(gl_PointCoord, 0.08);
     vec3 color = vec3(circle_1 * circle_2);
 
-    gl_FragColor = vec4(color * vec3(r, g, b), a);
+    gl_FragColor = vec4(color * vColor, a);
     if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b == 0.0) discard;
   }  
 }
@@ -198,19 +202,20 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
+varying vec3 vColor;
 
 void main() {
   // gl_FragColor = vec4(1.0, 1.0, 0.0, 0.5);
   if (view.z > zThres){
     // points at the far back
-    gl_FragColor = vec4(r, g, b, a);
+    gl_FragColor = vec4(vColor.r, vColor.g, vColor.b, a);
   }
   else {
     float vertical = 1.0 - lineSegment(gl_PointCoord, vec2(0.5, 0.05), vec2(0.5, 0.95));
     float horizontal = 1.0 - lineSegment(gl_PointCoord, vec2(0.05, 0.5), vec2(0.95, 0.5));
     float shaper = vertical + horizontal;
 
-    gl_FragColor = vec4(vec3(shaper) * vec3(r, g, b), a);
+    gl_FragColor = vec4(vec3(shaper) * vColor, a);
     if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b == 0.0) discard;
   }  
 }
@@ -232,12 +237,13 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
+varying vec3 vColor;
 
 void main() {
   // gl_FragColor = vec4(1.0, 1.0, 0.0, 0.5);
   if (view.z > zThres){
     // points at the far back
-    gl_FragColor = vec4(r, g, b, a);
+    gl_FragColor = vec4(vColor.r, vColor.g, vColor.b, a);
   }
   else {
     float top = 1.0 - lineSegment(gl_PointCoord, vec2(0.05, 0.05), vec2(0.95, 0.05));
@@ -246,7 +252,7 @@ void main() {
     float left = 1.0 - lineSegment(gl_PointCoord, vec2(0.05, 0.95), vec2(0.05, 0.05));
     float shaper = top + right + bottom + left;
 
-    gl_FragColor = vec4(vec3(shaper) * vec3(r, g, b), a);
+    gl_FragColor = vec4(vec3(shaper) * vColor, a);
     if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b == 0.0) discard;
   }
 }
@@ -268,12 +274,13 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
+varying vec3 vColor;
 
 void main() {
   // gl_FragColor = vec4(1.0, 1.0, 0.0, 0.5);
   if (view.z > zThres){
     // points at the far back
-    gl_FragColor = vec4(r, g, b, a);
+    gl_FragColor = vec4(vColor.r, vColor.g, vColor.b, a);
   }
   else {
     float side = 1.0;  // fragment has side length = 1.0
@@ -309,7 +316,7 @@ void main() {
     
     float shaper = line_1 + line_2 + line_3 + line_4 + line_5 + line_6 + line_7 + line_8 + line_9 + line_10 + line_11;
 
-    gl_FragColor = vec4(vec3(shaper) * vec3(r, g, b), a);
+    gl_FragColor = vec4(vec3(shaper) * vColor, a);
     if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b == 0.0) discard;
   }
 }
@@ -333,12 +340,13 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
+varying vec3 vColor;
 
 void main() {
   // gl_FragColor = vec4(1.0, 1.0, 0.0, 0.5);
   if (view.z > zThres){
     // points at the far back
-    gl_FragColor = vec4(r, g, b, a);
+    gl_FragColor = vec4(vColor.r, vColor.g, vColor.b, a);
   }
   else {
     float side = 1.0;  // fragment has side length = 1.0
@@ -377,7 +385,7 @@ void main() {
     
     float shaper = line_1 + line_2 + line_3 + line_4 + line_5 + line_6 + line_7 + line_8 + line_9 + line_10 + line_11 + line_12;
 
-    gl_FragColor = vec4(vec3(shaper) * vec3(r, g, b), a);
+    gl_FragColor = vec4(vec3(shaper) * vColor, a);
     if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b == 0.0) discard;
   }  
 }
@@ -399,12 +407,13 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
+varying vec3 vColor;
 
 void main() {
   // gl_FragColor = vec4(1.0, 1.0, 0.0, 0.5);
   if (view.z > zThres){
     // points at the far back
-    gl_FragColor = vec4(r, g, b, a);
+    gl_FragColor = vec4(vColor.r, vColor.g, vColor.b, a);
   }
   else {
     float line_1 = 1.0 - lineSegment(gl_PointCoord, vec2(0.05), vec2(0.5, 0.95));
@@ -412,7 +421,7 @@ void main() {
     float line_3 = 1.0 - lineSegment(gl_PointCoord, vec2(0.95, 0.05), vec2(0.05, 0.05));
     float shaper = line_1 + line_2 + line_3;
 
-    gl_FragColor = vec4(vec3(shaper) * vec3(r, g, b), a);
+    gl_FragColor = vec4(vec3(shaper) * vColor, a);
     if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b == 0.0) discard;
   }
 }
@@ -439,12 +448,13 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
+varying vec3 vColor;
 
 void main() {
   // gl_FragColor = vec4(1.0, 1.0, 0.0, 0.5);
   if (view.z > zThres){
     // points at the far back
-    gl_FragColor = vec4(r, g, b, a);
+    gl_FragColor = vec4(vColor.r, vColor.g, vColor.b, a);
   }
   else {
     vec2 uv = (gl_PointCoord - vec2(0.5)) * rot(PI * 0.5); // rotate
@@ -454,7 +464,7 @@ void main() {
     float line_3 = 1.0 - lineSegment(uv, vec2(0.95, 0.05), vec2(0.05, 0.05));
     float shaper = line_1 + line_2 + line_3;
 
-    gl_FragColor = vec4(vec3(shaper) * vec3(r, g, b), a);
+    gl_FragColor = vec4(vec3(shaper) * vColor, a);
     if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b == 0.0) discard;
   }  
 }
@@ -481,12 +491,13 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
+varying vec3 vColor;
 
 void main() {
   // gl_FragColor = vec4(1.0, 1.0, 0.0, 0.5);
   if (view.z > zThres){
     // points at the far back
-    gl_FragColor = vec4(r, g, b, a);
+    gl_FragColor = vec4(vColor.r, vColor.g, vColor.b, a);
   }
   else {
     vec2 uv = (gl_PointCoord - vec2(0.5)) * rot(1.5 * PI); // rotate
@@ -496,7 +507,7 @@ void main() {
     float line_3 = 1.0 - lineSegment(uv, vec2(0.95, 0.05), vec2(0.05, 0.05));
     float shaper = line_1 + line_2 + line_3;
 
-    gl_FragColor = vec4(vec3(shaper) * vec3(r, g, b), a);
+    gl_FragColor = vec4(vec3(shaper) * vColor, a);
     if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b == 0.0) discard;
   }  
 }
@@ -523,11 +534,12 @@ uniform float r;
 uniform float g;
 uniform float b;
 uniform float a;
+varying vec3 vColor;
 
 void main() {
   // gl_FragColor = vec4(1.0, 1.0, 0.0, 0.5);
   if (view.z > zThres){
-    gl_FragColor = vec4(r, g, b, a);
+    gl_FragColor = vec4(vColor.r, vColor.g, vColor.b, a);
   }
   else {
     vec2 uv = (gl_PointCoord - vec2(0.5)) * rot(PI); // rotate
@@ -537,7 +549,7 @@ void main() {
     float line_3 = 1.0 - lineSegment(uv, vec2(0.95, 0.05), vec2(0.05, 0.05));
     float shaper = line_1 + line_2 + line_3;
 
-    gl_FragColor = vec4(vec3(shaper) * vec3(r, g, b), a);
+    gl_FragColor = vec4(vec3(shaper) * vColor, a);
     if (gl_FragColor.r + gl_FragColor.g + gl_FragColor.b == 0.0) discard;
   }
 }

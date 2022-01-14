@@ -153,4 +153,5 @@ function render() {
     }
 
     RENDERER.render(SCENE, CAMERA);
+    LABEL_RENDERER.render(SCENE, CAMERA)
 }

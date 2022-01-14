@@ -2,6 +2,7 @@
 var CAMERA = null,
     SCENE = null,
     RENDERER = null,
+    LABEL_RENDERER = null,
     CONTROLS = null,
     CANVAS = null,
     ALL_GENEDATA = null,

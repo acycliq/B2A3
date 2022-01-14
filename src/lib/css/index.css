@@ -474,6 +474,13 @@ div.a {
     color: #AACCFF;
 }
 
+.moonlabel {
+    color: #ffff00;
+    font-family: sans-serif;
+    padding: 2px;
+    background: rgba(0, 0, 0, .6);
+}
+
 
 /*#chart-container > div {*/
 /*    position: absolute;*/

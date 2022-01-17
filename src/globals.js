@@ -22,6 +22,8 @@ var CAMERA = null,
         name: null,
         uuid: null,
         rgb: null,
+        position: null,
     },
     PARTICLE_SIZE = 1.0,
-    hoveredObjects = {};
+    hoveredObjects = {},
+    TOOLTIP = null;

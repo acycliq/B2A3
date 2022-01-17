@@ -474,11 +474,12 @@ div.a {
     color: #AACCFF;
 }
 
-.moonlabel {
+.pointlabel {
     color: #ffff00;
     font-family: sans-serif;
-    padding: 2px;
-    background: rgba(0, 0, 0, .6);
+    padding: 4px;
+    /*margin-left: 50px;*/
+    background: rgba(0, 0, 0, 0.6);
 }
 
 

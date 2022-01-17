@@ -40,12 +40,12 @@ function iniScene() {
     RENDERER.shadowMap.type = THREE.BasicShadowMap;
 
     const tooltipDiv = document.createElement('div');
-    tooltipDiv.className = 'moonlabel';
+    tooltipDiv.className = 'pointlabel';
     tooltipDiv.textContent = 'Tooltip';
     tooltipDiv.style.marginTop = '-1em';
-    const moonLabel = new THREE.CSS2DObject(tooltipDiv);
-    moonLabel.position.set(0, 0, 0);
-    SCENE.add(moonLabel);
+    TOOLTIP = new THREE.CSS2DObject(tooltipDiv);
+    TOOLTIP.position.set(0, 0, 0);
+    SCENE.add(TOOLTIP);
 
     LABEL_RENDERER = new THREE.CSS2DRenderer();
     LABEL_RENDERER.setSize(window.innerWidth, window.innerHeight);

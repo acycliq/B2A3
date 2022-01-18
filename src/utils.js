@@ -65,6 +65,10 @@ function getGenePanel(geneData) {
         console.log('Waring: These genes have not been assigned color, glyph etc in the glyphConfig.js: ' + missing);
     }
 
+    // save the gene panel to the local storage
+    sessionStorage.setItem('gene_panel', JSON.stringify(panel));
+    console.log('Gene panel written to local storage')
+
     return panel
 }
 
@@ -278,6 +282,54 @@ function simulate_spots(counts) {
         _sim_data[i] = temp
     }
     return _sim_data
+}
+
+
+// from https://github.com/jonathantneal/convert-colors
+function rgb2hex(rgbR, rgbG, rgbB) {
+	return `#${((1 << 24) + (Math.round(rgbR * 255 / 100) << 16) + (Math.round(rgbG * 255 / 100) << 8) + Math.round(rgbB * 255 / 100)).toString(16).slice(1)}`;
+}
+
+function hsl2rgb(hslH, hslS, hslL) {
+	// calcuate t2
+	const t2 = hslL <= 50 ? hslL * (hslS + 100) / 100 : hslL + hslS - hslL * hslS / 100;
+
+	// calcuate t1
+	const t1 = hslL * 2 - t2;
+
+	// calculate rgb
+	const [ rgbR, rgbG, rgbB ] = [
+		hue2rgb(t1, t2, hslH + 120),
+		hue2rgb(t1, t2, hslH),
+		hue2rgb(t1, t2, hslH - 120)
+	];
+
+	return [ rgbR, rgbG, rgbB ];
+}
+
+function hue2rgb(t1, t2, hue) {
+	// calculate the ranged hue
+	const rhue = hue < 0 ? hue + 360 : hue > 360 ? hue - 360 : hue;
+
+	// calculate the rgb value
+	const rgb = rhue * 6 < 360
+		? t1 + (t2 - t1) * rhue / 60
+	: rhue * 2 < 360
+		? t2
+	: rhue * 3 < 720
+		? t1 + (t2 - t1) * (240 - rhue) / 60
+	: t1;
+
+	return rgb;
+}
+
+function hsv2hex(hsvH, hsvS, hsvV) {
+    // takes in values between 0 and 1
+	return _hsv2hex(hsvH*100, hsvS*100, hsvV*100)
+}
+
+function _hsv2hex(hsvH, hsvS, hsvV) {
+	return rgb2hex(...hsl2rgb(hsvH, hsvS, hsvV));
 }
 
 // function hide_back_face() {

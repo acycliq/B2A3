@@ -24,6 +24,5 @@ var CAMERA = null,
         rgb: null,
         position: null,
     },
-    PARTICLE_SIZE = 1.0,
     hoveredObjects = {},
     TOOLTIP = null;

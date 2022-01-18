@@ -107,7 +107,7 @@ function render() {
             if (INTERSECTED.index != intersects[0].index && INTERSECTED.name != intersects[0].object.name) {
                 if (INTERSECTED.uuid) {
                     var previous_particles = SCENE.children.filter(d => (d.type === 'Points') & (d.uuid === INTERSECTED.uuid))[0];
-                    previous_particles.geometry.attributes.size.array[INTERSECTED.index] = PARTICLE_SIZE;
+                    previous_particles.geometry.attributes.size.array[INTERSECTED.index] = CONFIGSETTINGS.particle_size;
                     previous_particles.geometry.attributes.size.needsUpdate = true;
 
                     previous_particles.geometry.attributes.mycolor.array[3 * INTERSECTED.index] = INTERSECTED.rgb[0];
@@ -121,7 +121,7 @@ function render() {
                     // previous_particles.geometry.attributes.position.needsUpdate = true;
                 }
 
-                attributes.size.array[INTERSECTED.index] = PARTICLE_SIZE;
+                attributes.size.array[INTERSECTED.index] = CONFIGSETTINGS.particle_size;
                 INTERSECTED.rgb = [attributes.mycolor.array[3 * intersects[0].index],
                     attributes.mycolor.array[3 * intersects[0].index + 1],
                     attributes.mycolor.array[3 * intersects[0].index + 2],
@@ -140,7 +140,7 @@ function render() {
                 INTERSECTED.name = intersects[0].object.name;
                 INTERSECTED.uuid = intersects[0].object.uuid;
 
-                attributes.size.array[INTERSECTED.index] = PARTICLE_SIZE * 1.25;
+                attributes.size.array[INTERSECTED.index] = CONFIGSETTINGS.particle_size * 1.25;
                 attributes.size.needsUpdate = true;
 
                 TOOLTIP.visible = true;
@@ -167,7 +167,7 @@ function render() {
         $('.pointlabel').text('')
         TOOLTIP.visible = false;
 
-        attributes.size.array[INTERSECTED.index] = PARTICLE_SIZE;
+        attributes.size.array[INTERSECTED.index] = CONFIGSETTINGS.particle_size;
         attributes.size.needsUpdate = true;
 
         // attributes.position.array[3 * INTERSECTED.index] = INTERSECTED.position[0];

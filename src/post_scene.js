@@ -8,6 +8,9 @@ function postScene() {
     // mouse move
     window.addEventListener('mousemove', onMouseMove, false);
 
+    // mouse wheel
+    // window.addEventListener('mousewheel', MouseWheelHandler, false);
+
     // finally remove the preloader
     removePreloader();
 
@@ -31,6 +34,18 @@ function postScene() {
         RENDERER.setSize(window.innerWidth, window.innerHeight);
         RENDERER.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     }
+
+    function MouseWheelHandler(e) {
+        // this will zoom to the mouse cursor (but it breaks panning!!)
+        console.log('mouse wheel event detected')
+        var vector = new THREE.Vector3(MOUSE.x, MOUSE.y, 1 );
+        vector.unproject(CAMERA);
+        vector.sub(CAMERA.position);
+        var factor = 1000.0;
+        CAMERA.position.addVectors(CAMERA.position, vector.setLength(factor));
+        CONTROLS.target.addVectors(CONTROLS.target, vector.setLength(factor));
+    }
+
 
 
     // var paramsGUI = {

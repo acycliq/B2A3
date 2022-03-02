@@ -1,4 +1,4 @@
-function iniContent(spots, cells) {
+function iniContent(spots, cellData) {
     console.log('Init Viewer');
 
     var points = GENEPANEL.map((d, i) => my_particles(spots[i], d));
@@ -9,9 +9,9 @@ function iniContent(spots, cells) {
     // SCENE.add(my_particles(spots[0], 'Aldoc'));
 
     // // add_spheres();
-    // INSTANCEDMESH = make_cells(cells);
+    INSTANCEDMESH = make_cells(cellData);
     // SCENE.add(INSTANCEDMESH.back_face.instancedMesh); // needs to be rendered first
-    // SCENE.add(INSTANCEDMESH.front_face.instancedMesh);
+    SCENE.add(INSTANCEDMESH.front_face.instancedMesh);
 
     // load_dapi()
 

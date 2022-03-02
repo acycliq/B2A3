@@ -1,4 +1,4 @@
-function make_cells(data) {
+function make_cells(cellData) {
     var front_props = {
             side: THREE.FrontSide,
             opacity: 0.4,
@@ -10,8 +10,9 @@ function make_cells(data) {
             name: 'back_mesh'
         };
 
-    var front_face = ellipsoids(data, front_props),
-        back_face = ellipsoids(data, back_props);
+    cellData = cellData.filter(d => d.color.r + d.color.g + d.color.b !== 0);
+    var front_face = ellipsoids(cellData, front_props),
+        back_face = ellipsoids(cellData, back_props);
         cells = {};
     cells.front_face = front_face;
     cells.back_face = back_face;
@@ -21,6 +22,10 @@ function make_cells(data) {
 function ellipsoids(data, props) {
     var counts = data.length,
         loader = new THREE.TextureLoader();
+
+    var img_width = CONFIGSETTINGS.img_width,
+        img_height = CONFIGSETTINGS.img_height,
+        img_depth = CONFIGSETTINGS.img_depth;
 
     const flakesTexture = loader.load('./src/flakes.png')
     const base_props = {
@@ -69,10 +74,10 @@ function ellipsoids(data, props) {
     console.log('tic')
     var temp_obj = new THREE.Mesh(new THREE.SphereGeometry(), new THREE.MeshBasicMaterial());
     for (var i = 0; i < counts; i++) {
-        var coords = data[i].position,
-            scales = data[i].scale,
-            rot = data[i].rotation,
-            color = data[i].color;
+        var coords = new THREE.Vector3(data[i].X/3 - img_width / 2, img_height - data[i].Y/3  - img_height / 2, 6 * (data[i].Z - img_depth / 2) ),
+            scales = new THREE.Vector3(...data[i].sphere_scale),
+            rot = new THREE.Vector3(...data[i].sphere_rotation),
+            color =  data[i].color;
         dummy.position.set(coords.x, coords.y, coords.z);
         dummy.scale.set(scales.x, scales.y, scales.z);
         dummy.rotation.set(rot.x, rot.y, rot.z);

@@ -59,13 +59,31 @@ function setInstanceColor(instanceId, isHighlighting) {
 }
 
 function setHightlightSphere(instanceId, isHighlighting) {
+    if (instanceId == -1) return;
     var dummy = new THREE.Object3D();
-    var highlight_sphere = new THREE.InstancedMesh(
+    var loader = new THREE.TextureLoader();
+    var props = {
+        clearcoat: 1.0,
+        clearcoatRoughness: 0,
+        metalness: 0.065,
+        roughness: 0.3,
+        normalMap: loader.load('./src/flakes.png'),
+        normalScale: new THREE.Vector2(0.1, 0.1),
+        transmission: 0.0,
+        transparent: true,
+        side: THREE.BackSide,
+    };
+    var material = new THREE.MeshPhysicalMaterial(props);
+    material.opacity = 1.0;
+    material.normalMap.wrapS = material.normalMap.wrapT = THREE.RepeatWrapping;
+    material.normalMap.repeat = new THREE.Vector2(30, 30);
+
+    var highlighter = new THREE.InstancedMesh(
         //provide geometry
-        new THREE.SphereBufferGeometry(1, 24, 12),
+        new THREE.SphereBufferGeometry(1, 36, 18),
 
         //provide material
-        new THREE.MeshPhysicalMaterial(),
+        material,
 
         //how many instances to allocate
         1
@@ -74,18 +92,26 @@ function setHightlightSphere(instanceId, isHighlighting) {
     var coords = NON_ZERO_CELLS[instanceId].sphere_position,
         scales = NON_ZERO_CELLS[instanceId].sphere_scale,
         rot = NON_ZERO_CELLS[instanceId].sphere_rotation,
-        color = new THREE.Color("yellow");
+        // color = new THREE.Color("yellow");
+        color = NON_ZERO_CELLS[instanceId].color;
     dummy.position.set(coords.x, coords.y, coords.z);
-    dummy.scale.set(scales.x, scales.y, scales.z);
+    dummy.scale.set(scales.x*1.02, scales.y*1.02, scales.z*1.02);
     dummy.rotation.set(rot.x, rot.y, rot.z);
     dummy.updateMatrix();
-    highlight_sphere.name = 'cell_highlight';
-    highlight_sphere.setMatrixAt(0, dummy.matrix);
-    highlight_sphere.setColorAt(0, new THREE.Color(color.r, color.g, color.b));
+    highlighter.name = 'cell_highlight';
+    highlighter.setMatrixAt(0, dummy.matrix);
+    highlighter.setColorAt(0, new THREE.Color(color.r, color.g, color.b));
+    highlighter.receiveShadow = false;
+    highlighter.castShadow = true;
 
-    SCENE.add(highlight_sphere)
-    // instancedMesh.geometry.setPositionAt(i, trsCache[i].position);
-    // instancedMesh.geometry.setScaleAt(i, uScale ? ss : trsCache[i].scale);
+    if (isHighlighting) {
+        SCENE.add(highlighter)
+    }
+    // else {
+    //     SCENE.remove(highlighter)
+    // }
+    // // instancedMesh.geometry.setPositionAt(i, trsCache[i].position);
+    // // instancedMesh.geometry.setScaleAt(i, uScale ? ss : trsCache[i].scale);
 }
 
 function add_highlight_sphere(instanceId) {

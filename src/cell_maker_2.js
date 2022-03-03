@@ -1,4 +1,4 @@
-function make_cells(cellData) {
+function make_cells_2(data) {
     var front_props = {
             side: THREE.FrontSide,
             opacity: 0.4,
@@ -10,16 +10,17 @@ function make_cells(cellData) {
             name: 'back_mesh'
         };
 
-    cellData = cellData.filter(d => d.color.r + d.color.g + d.color.b !== 0);
-    var front_face = ellipsoids(cellData, front_props),
-        back_face = ellipsoids(cellData, back_props);
+    data = data.filter(d => d.color.r + d.color.g + d.color.b !== 0);
+    // data = [data[0]]
+    var front_face = ellipsoids_2(data, front_props),
+        back_face = ellipsoids_2(data, back_props);
         cells = {};
     cells.front_face = front_face;
     cells.back_face = back_face;
     return cells
 }
 
-function ellipsoids(data, props) {
+function ellipsoids_2(data, props) {
     var counts = data.length,
         loader = new THREE.TextureLoader();
 
@@ -49,7 +50,7 @@ function ellipsoids(data, props) {
 
 
     var uScale = 0;
-    var widthSegments = 8,
+    var widthSegments = 16,
         heightSegments = 0.5 * widthSegments;
     var geometry =  new THREE.SphereBufferGeometry(1, widthSegments, heightSegments);
     var _n = geometry.index.count/3;
@@ -79,7 +80,7 @@ function ellipsoids(data, props) {
             rot = data[i].sphere_rotation,
             color =  data[i].color;
         dummy.position.set(coords.x, coords.y, coords.z);
-        dummy.scale.set(scales.x, scales.y, scales.z);
+        dummy.scale.set(scales.x*0.99, scales.y*0.99, scales.z*0.99);
         dummy.rotation.set(rot.x, rot.y, rot.z);
         dummy.updateMatrix();
         INSTANCEDMESH.name = props.name;

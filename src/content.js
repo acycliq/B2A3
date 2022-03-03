@@ -9,8 +9,11 @@ function iniContent(spots, cellData) {
     // SCENE.add(my_particles(spots[0], 'Aldoc'));
 
     // // add_spheres();
-    INSTANCEDMESH = make_cells(cellData);
+    // INSTANCEDMESH = make_cells(cellData);
     // SCENE.add(INSTANCEDMESH.back_face.instancedMesh); // needs to be rendered first
+    // SCENE.add(INSTANCEDMESH.front_face.instancedMesh);
+
+    INSTANCEDMESH = make_cells_2(cellData);
     SCENE.add(INSTANCEDMESH.front_face.instancedMesh);
 
     // load_dapi()

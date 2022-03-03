@@ -7,7 +7,7 @@ var CAMERA = null,
     CANVAS = null,
     ALL_GENEDATA = null,
     CELL_DATA,
-    CELLS_ARR = [],
+    DEMO_CELLS_ARR = [],
     SPOTS_ARR = [],
     CONFIGSETTINGS = null,
     legend_added = false, //used to make sure the listener is attached only once

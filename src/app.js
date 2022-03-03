@@ -1,4 +1,7 @@
 function app(geneData, cellData) {
+    var img_width = CONFIGSETTINGS.img_width,
+        img_height = CONFIGSETTINGS.img_height,
+        img_depth = CONFIGSETTINGS.img_depth;
 
     geneData = geneData.sort((a, b) => (a.z > b.z) ? 1 : -1);
 
@@ -12,8 +15,13 @@ function app(geneData, cellData) {
         d.color = hexToRgb(cellColorMap.get(d.topClass).color)
     });
 
-
-
+    // convert scale, rotation, position to a Vector3
+    cellData.forEach((d, i) =>  {
+        d['sphere_scale'] = new THREE.Vector3(...d.sphere_scale);
+        d['sphere_rotation'] = new THREE.Vector3(...d.sphere_rotation);
+        d['sphere_position'] = new THREE.Vector3(d.X/3 - img_width / 2, img_height - d.Y/3  - img_height / 2, 6 * (d.Z - img_depth / 2) );
+        d['color'] =  {r: d.color.r/255, g: d.color.g/255, b: d.color.b/255};
+    });
 
 
     // group by gene name
@@ -26,9 +34,7 @@ function app(geneData, cellData) {
     GENEPANEL = getGenePanel(geneData);
 
     // loop over the genes and collect in one array the coords for each spot
-    var img_width = CONFIGSETTINGS.img_width,
-        img_height = CONFIGSETTINGS.img_height,
-        img_depth = CONFIGSETTINGS.img_depth;
+
 
     for (var i = 0; i < GENEPANEL.length; i++) {
         var g = GENEPANEL[i];
@@ -38,7 +44,8 @@ function app(geneData, cellData) {
     }
 
     // Get the cell data
-    CELLS_ARR = get_cell_xyz();
+    // DEMO_CELLS_ARR = get_cell_xyz();
+    // jim = get_cell_xyz_2(cellData, img_width, img_height, img_depth);
 
     iniScene();
     iniLights();
@@ -58,3 +65,17 @@ function maxIndex(data){
 }
 
 
+function get_cell_xyz_2(data, img_width, img_height, img_depth){
+    out = [];
+    obj = {};
+    data.forEach((d, i) =>  {
+        out.push ({
+            'sphere_scale': new THREE.Vector3(...d.sphere_scale),
+            'sphere_rotation': new THREE.Vector3(...d.sphere_rotation),
+            'sphere_position': new THREE.Vector3(d.X/3 - img_width / 2, img_height - d.Y/3  - img_height / 2, 6 * (d.Z - img_depth / 2) ),
+            'color': {r: d.color.r/255, g: d.color.g/255, b: d.color.b/255},
+
+        });
+    })
+    return out
+}

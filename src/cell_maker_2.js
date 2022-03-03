@@ -10,6 +10,7 @@ function make_cells_2(data) {
             name: 'back_mesh'
         };
 
+    // remove the zero class cells. No need to plot them
     data = data.filter(d => d.color.r + d.color.g + d.color.b !== 0);
     // data = [data[0]]
     var front_face = ellipsoids_2(data, front_props),
@@ -23,10 +24,6 @@ function make_cells_2(data) {
 function ellipsoids_2(data, props) {
     var counts = data.length,
         loader = new THREE.TextureLoader();
-
-    var img_width = CONFIGSETTINGS.img_width,
-        img_height = CONFIGSETTINGS.img_height,
-        img_depth = CONFIGSETTINGS.img_depth;
 
     const flakesTexture = loader.load('./src/flakes.png')
     const base_props = {

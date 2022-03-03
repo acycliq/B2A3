@@ -1,61 +1,11 @@
 // The animation loop. Code in the animate() function is getting executed on every tick
 
+var attributes;
+
 function animate() {
     requestAnimationFrame(animate);
-    // mouseover();
     render();
     stats.update();
-}
-
-// var hoveredObjects = {};
-
-function mouseover() {
-    RAYCASTER.setFromCamera(MOUSE, CAMERA);
-    // raycaster.far = 100;
-    var target = SCENE.children.filter(d => (d.type === 'Points') & (d.visible));
-    const intersects = RAYCASTER.intersectObjects(target, true);
-
-    if (intersects.length && MOUSE.x) {
-        $('html,body').css('cursor', 'pointer');
-        var hoveredObj = intersects[0].object;
-        var gene = hoveredObj.name,
-            id = intersects[0].index;
-        if (hoveredObjects['gene'] === gene && hoveredObjects['id'] === id) {
-            // console.log('This spot has been hovered again')
-        } else {
-            // remove the old before adding the new
-            SCENE.children.filter(d => d.uuid === hoveredObjects['uuid']).forEach(d => SCENE.remove(d));
-            h = highlighter(gene, id);
-            hoveredObjects['gene'] = gene;
-            hoveredObjects['id'] = id;
-            hoveredObjects['uuid'] = h.uuid;
-            SCENE.add(h);
-            console.log('Added highlighing for uuid: ' + h.uuid);
-        }
-    } else {
-        $('html,body').css('cursor', 'default');
-        if (hoveredObjects['gene']) {
-            SCENE.children.filter(d => d.uuid === hoveredObjects['uuid']).forEach(d => SCENE.remove(d));
-            console.log('removed uuid: ' + hoveredObjects['uuid']);
-            delete hoveredObjects['gene'];
-            delete hoveredObjects['id'];
-            delete hoveredObjects['uuid'];
-            hoveredObjects = {};
-        }
-    }
-}
-
-function setInstanceColor(instanceId, isHighlighting) {
-    if (instanceId == -1) return;
-    var _color;
-    var original_color = CELL_DATA[instanceId].color;
-    var tc = {r: original_color.r * 255, g: original_color.g * 255, b: original_color.b * 255};
-    var highlight_color = tinycolor(tc).desaturate(80).toRgb();
-    highlight_color = new THREE.Color(highlight_color.r / 255, highlight_color.g / 255, highlight_color.b / 255)
-    isHighlighting ? _color = highlight_color : _color = new THREE.Color(original_color.r, original_color.g, original_color.b);
-
-    INSTANCEDMESH.front_face.instancedMesh.setColorAt(instanceId, _color);
-    INSTANCEDMESH.front_face.instancedMesh.instanceColor.needsUpdate = true;
 }
 
 function setHightlightSphere(instanceId, isHighlighting) {
@@ -136,7 +86,7 @@ function remove_highlight_sphere() {
     $('html,body').css('cursor', 'default');
 }
 
-var attributes
+
 
 function render() {
     RAYCASTER.setFromCamera(MOUSE, CAMERA);

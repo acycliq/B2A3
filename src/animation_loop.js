@@ -48,7 +48,7 @@ function mouseover() {
 function setInstanceColor(instanceId, isHighlighting) {
     if (instanceId == -1) return;
     var _color;
-    var original_color = CELLS_ARR[instanceId].color;
+    var original_color = CELL_DATA[instanceId].color;
     var tc = {r: original_color.r * 255, g: original_color.g * 255, b: original_color.b * 255};
     var highlight_color = tinycolor(tc).desaturate(80).toRgb();
     highlight_color = new THREE.Color(highlight_color.r / 255, highlight_color.g / 255, highlight_color.b / 255)
@@ -71,9 +71,9 @@ function setHightlightSphere(instanceId, isHighlighting) {
         1
     );
 
-    var coords = CELLS_ARR[instanceId].position,
-        scales = CELLS_ARR[instanceId].scale,
-        rot = CELLS_ARR[instanceId].rotation,
+    var coords = NON_ZERO_CELLS[instanceId].sphere_position,
+        scales = NON_ZERO_CELLS[instanceId].sphere_scale,
+        rot = NON_ZERO_CELLS[instanceId].sphere_rotation,
         color = new THREE.Color("yellow");
     dummy.position.set(coords.x, coords.y, coords.z);
     dummy.scale.set(scales.x, scales.y, scales.z);
@@ -86,6 +86,28 @@ function setHightlightSphere(instanceId, isHighlighting) {
     SCENE.add(highlight_sphere)
     // instancedMesh.geometry.setPositionAt(i, trsCache[i].position);
     // instancedMesh.geometry.setScaleAt(i, uScale ? ss : trsCache[i].scale);
+}
+
+function add_highlight_sphere(instanceId) {
+    if (instanceId != PREV_INSTANCE_ID) {
+        remove_highlight_sphere();
+        setHightlightSphere(instanceId, true);
+
+        $('html,body').css('cursor', 'pointer');
+    }
+}
+
+function remove_highlight_sphere() {
+    // 1. restore previous id
+    PREV_INSTANCE_ID = -1;
+
+    // 2. remove the mesh from the scene
+    SCENE.children
+        .filter(d => d.name === 'cell_highlight')
+        .forEach(d => SCENE.remove(d))
+
+    // restore the mouse cursor
+    $('html,body').css('cursor', 'default');
 }
 
 var attributes
@@ -184,6 +206,17 @@ function render() {
         INTERSECTED.name = null;
         INTERSECTED.uuid = null;
         INTERSECTED.rgb = null;
+    }
+
+    const intersection = RAYCASTER.intersectObject(INSTANCEDMESH.front_face.instancedMesh);
+    if (intersection.length > 0) {
+        var instanceId = intersection[0].instanceId;
+        add_highlight_sphere(instanceId);
+        // add_highlight_glyphs(instanceId);
+        PREV_INSTANCE_ID = instanceId;
+    } else {
+        remove_highlight_sphere();
+        // remove_highlight_glyphs();
     }
 
     RENDERER.render(SCENE, CAMERA);

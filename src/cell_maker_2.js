@@ -11,10 +11,10 @@ function make_cells_2(data) {
         };
 
     // remove the zero class cells. No need to plot them
-    data = data.filter(d => d.color.r + d.color.g + d.color.b !== 0);
+    NON_ZERO_CELLS = data.filter(d => d.color.r + d.color.g + d.color.b !== 0);
     // data = [data[0]]
-    var front_face = ellipsoids_2(data, front_props),
-        back_face = ellipsoids_2(data, back_props);
+    var front_face = ellipsoids_2(NON_ZERO_CELLS, front_props),
+        back_face = ellipsoids_2(NON_ZERO_CELLS, back_props);
         cells = {};
     cells.front_face = front_face;
     cells.back_face = back_face;

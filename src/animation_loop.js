@@ -102,7 +102,7 @@ function render() {
             attributes = geometry.attributes;
 
 
-            if (INTERSECTED.index != intersects[0].index && INTERSECTED.name != intersects[0].object.name) {
+            if (INTERSECTED.index !== intersects[0].index && INTERSECTED.name !== intersects[0].object.name) {
                 if (INTERSECTED.uuid) {
                     var previous_particles = SCENE.children.filter(d => (d.type === 'Points') & (d.uuid === INTERSECTED.uuid))[0];
                     previous_particles.geometry.attributes.size.array[INTERSECTED.index] = CONFIGSETTINGS.particle_size;
@@ -187,6 +187,14 @@ function render() {
     const intersection = RAYCASTER.intersectObject(INSTANCEDMESH.front_face.instancedMesh);
     if (intersection.length > 0) {
         var instanceId = intersection[0].instanceId;
+        if (CTRL_KEY_PRESSED){
+            INSTANCEDMESH.front_face.instancedMesh.visible = false;
+        }
+        else{
+            INSTANCEDMESH.front_face.instancedMesh.visible = true;
+        }
+
+        // INSTANCEDMESH.back_face.instancedMesh.material.opacity = 1.0;
         add_highlight_sphere(instanceId);
         // add_highlight_glyphs(instanceId);
         PREV_INSTANCE_ID = instanceId;

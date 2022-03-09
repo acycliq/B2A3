@@ -27,4 +27,5 @@ var CAMERA = null,
         position: null,
     },
     hoveredObjects = {},
+    CTRL_KEY_PRESSED = null,
     TOOLTIP = null;

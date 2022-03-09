@@ -8,6 +8,26 @@ function postScene() {
     // mouse move
     window.addEventListener('mousemove', onMouseMove, false);
 
+    document.addEventListener('keydown', (event) => {
+        console.log(event); // all event related info
+        console.log(event.type);
+        console.log(event.key);
+        console.log(event.code);
+        if (event.key==='Control'){
+            CTRL_KEY_PRESSED = true
+        }
+    });
+
+    document.addEventListener('keyup', (event) => {
+        console.log(event); // all event related info
+        console.log(event.type);
+        console.log(event.key);
+        console.log(event.code);
+        if (event.key==='Control'){
+            CTRL_KEY_PRESSED = false
+        }
+    });
+
     // mouse wheel
     // window.addEventListener('mousewheel', MouseWheelHandler, false);
 
@@ -45,7 +65,6 @@ function postScene() {
         CAMERA.position.addVectors(CAMERA.position, vector.setLength(factor));
         CONTROLS.target.addVectors(CONTROLS.target, vector.setLength(factor));
     }
-
 
 
     // var paramsGUI = {

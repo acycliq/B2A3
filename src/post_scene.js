@@ -13,7 +13,7 @@ function postScene() {
         console.log(event.type);
         console.log(event.key);
         console.log(event.code);
-        if (event.key==='Control'){
+        if (event.ctrlKey){
             CTRL_KEY_PRESSED = true
         }
     });
@@ -23,7 +23,8 @@ function postScene() {
         console.log(event.type);
         console.log(event.key);
         console.log(event.code);
-        if (event.key==='Control'){
+        if (!event.ctrlKey){
+            console.log('CTRL UP')
             CTRL_KEY_PRESSED = false
         }
     });

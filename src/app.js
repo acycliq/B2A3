@@ -27,25 +27,17 @@ function app(geneData, cellData) {
     // group by gene name
     var data = groupBy(geneData, 'Gene');
 
-    // get all the gene names
-    // geneNames = Object.keys(data).sort();
-
     // get the gene panel (this is assigned to a global variable)
     GENEPANEL = getGenePanel(geneData);
 
     // loop over the genes and collect in one array the coords for each spot
-
-
     for (var i = 0; i < GENEPANEL.length; i++) {
         var g = GENEPANEL[i];
 
+        // CAREFULL HERE. Division by 3 and multiplying by 6 is only for this particular dataset!!!
         var temp = new Float32Array(data[g].map(d => [d.x/3 - img_width / 2, img_height - d.y/3 - img_height / 2, 6 * (d.z - img_depth / 2)]).flat());
         SPOTS_ARR.push(temp)
     }
-
-    // Get the cell data
-    // DEMO_CELLS_ARR = get_cell_xyz();
-    // jim = get_cell_xyz_2(cellData, img_width, img_height, img_depth);
 
     iniScene();
     iniLights();
@@ -64,18 +56,3 @@ function maxIndex(data){
     return data.reduce((iMax, x, i, arr) => x > arr[iMax] ? i : iMax, 0);
 }
 
-
-function get_cell_xyz_2(data, img_width, img_height, img_depth){
-    out = [];
-    obj = {};
-    data.forEach((d, i) =>  {
-        out.push ({
-            'sphere_scale': new THREE.Vector3(...d.sphere_scale),
-            'sphere_rotation': new THREE.Vector3(...d.sphere_rotation),
-            'sphere_position': new THREE.Vector3(d.X/3 - img_width / 2, img_height - d.Y/3  - img_height / 2, 6 * (d.Z - img_depth / 2) ),
-            'color': {r: d.color.r/255, g: d.color.g/255, b: d.color.b/255},
-
-        });
-    })
-    return out
-}

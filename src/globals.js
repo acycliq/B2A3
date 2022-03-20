@@ -28,4 +28,6 @@ var CAMERA = null,
     },
     hoveredObjects = {},
     CTRL_KEY_PRESSED = null,
+    PREVIOUS_CELL_LABEL = null,
+    HIGHLIGHTING_POINTS = null,
     TOOLTIP = null;

@@ -187,11 +187,40 @@ function render() {
     const intersection = RAYCASTER.intersectObject(INSTANCEDMESH.front_face.instancedMesh);
     if (intersection.length > 0) {
         var instanceId = intersection[0].instanceId;
-        if (CTRL_KEY_PRESSED){
+        var cell_label = NON_ZERO_CELLS[instanceId].Cell_Num;
+        console.log('Hovering over cell: ' + cell_label)
+        if (CTRL_KEY_PRESSED) {
             INSTANCEDMESH.front_face.instancedMesh.visible = false;
+            SCENE.children.filter(d => (d.type === 'Points') & (d.name !== 'glyph_highlighting')).forEach(d => d.visible=false);
+            var _target_spots = ALL_GENEDATA.filter(d => d.neighbour===cell_label);
+            if (cell_label !== PREVIOUS_CELL_LABEL){
+                var target_spots = groupBy(_target_spots, 'Gene');
+                console.log(target_spots);
+                var target_genes = Object.keys(target_spots);
+                var temp_arr = [];
+                for (var i = 0; i < target_genes.length; i++) {
+                    var g = target_genes[i],
+                        temp = new Float32Array(target_spots[g].map(d => centralise_coords([d.x, d.y, d.z], CONFIGSETTINGS)).flat());
+                    temp_arr.push(temp)
+                }
+                HIGHLIGHTING_POINTS = target_genes.map((d, i) => my_particles(temp_arr[i], d));
+                HIGHLIGHTING_POINTS.forEach(d => d.name = 'glyph_highlighting');
+                HIGHLIGHTING_POINTS.map(d => SCENE.add(d));
+                PREVIOUS_CELL_LABEL = cell_label;
+            }
+            else{
+                SCENE.children.filter(d => d.name === 'glyph_highlighting').forEach(d => d.visible=true);
+            }
+
+            // var points = GENEPANEL.map((d, i) => my_particles(spots[i], d));
+            // points.map(d => SCENE.add(d));
         }
         else{
             INSTANCEDMESH.front_face.instancedMesh.visible = true;
+            SCENE.children.filter(d => d.type === 'Points').forEach(d => d.visible=true)
+            SCENE.children.filter(d => d.name === 'glyph_highlighting').forEach(d => SCENE.remove(d));
+            HIGHLIGHTING_POINTS = null
+            PREVIOUS_CELL_LABEL = null
         }
 
         // INSTANCEDMESH.back_face.instancedMesh.material.opacity = 1.0;

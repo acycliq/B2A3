@@ -104,6 +104,7 @@ function data_loader(workPackage) {
         console.log('num of cells: ' + CELL_DATA.length);
 
         // do now the chart
+        // ALL_GENEDATA = ALL_GENEDATA.filter(d => d.neighbour===1764)
         app(ALL_GENEDATA, CELL_DATA)
     }
 

@@ -189,12 +189,13 @@ function render() {
         var instanceId = intersection[0].instanceId;
         var cell_label = NON_ZERO_CELLS[instanceId].Cell_Num;
         console.log('Hovering over cell: ' + cell_label)
+
+        INSTANCEDMESH.front_face.instancedMesh.visible = false;
+        SCENE.children.filter(d => (d.type === 'Points') & (d.name !== 'glyph_highlighting')).forEach(d => d.visible=false);
+        var _target_spots = ALL_GENEDATA.filter(d => d.neighbour===cell_label);
+        var target_spots = groupBy(_target_spots, 'Gene');
         if (CTRL_KEY_PRESSED) {
-            INSTANCEDMESH.front_face.instancedMesh.visible = false;
-            SCENE.children.filter(d => (d.type === 'Points') & (d.name !== 'glyph_highlighting')).forEach(d => d.visible=false);
-            var _target_spots = ALL_GENEDATA.filter(d => d.neighbour===cell_label);
             if (cell_label !== PREVIOUS_CELL_LABEL){
-                var target_spots = groupBy(_target_spots, 'Gene');
                 console.log(target_spots);
                 var target_genes = Object.keys(target_spots);
                 var temp_arr = [];
@@ -209,28 +210,14 @@ function render() {
                 PREVIOUS_CELL_LABEL = cell_label;
 
                 // make lines
-                var centroid = [NON_ZERO_CELLS[instanceId].X, NON_ZERO_CELLS[instanceId].Y, NON_ZERO_CELLS[instanceId].Z]
-                var out = make_line(target_spots, centroid);
-                out.map(d => SCENE.add(d))
-                var line_points = []
-                var _xyz = [{x: 4427, y: 3918, z:41}];
-                var xyz = _xyz.map(d => centralise_coords([d.x, d.y, d.z], CONFIGSETTINGS)).flat();
-                line_points.push(
-                    new THREE.Vector3(...xyz),
-                    new THREE.Vector3(0, 0, 0),
-                )
-                var geometry = new THREE.BufferGeometry().setFromPoints(line_points);
-                // CREATE THE LINE
-                var line = new THREE.Line(
-                    geometry,
-                    new THREE.LineBasicMaterial({
-                        color: 0x0000ff
-                    })
-                );
-                SCENE.add(line)
+                // SCENE.children.filter(d => d.type === "Line").forEach(el => SCENE.remove(el))
+                // var centroid = [NON_ZERO_CELLS[instanceId].X, NON_ZERO_CELLS[instanceId].Y, NON_ZERO_CELLS[instanceId].Z]
+                // var out = make_line(target_spots, centroid);
+                // out.map(d => SCENE.add(d))
             }
             else{
                 SCENE.children.filter(d => d.name === 'glyph_highlighting').forEach(d => d.visible=true);
+
             }
 
             // var points = GENEPANEL.map((d, i) => my_particles(spots[i], d));
@@ -242,6 +229,13 @@ function render() {
             SCENE.children.filter(d => d.name === 'glyph_highlighting').forEach(d => SCENE.remove(d));
             HIGHLIGHTING_POINTS = null
             PREVIOUS_CELL_LABEL = null
+
+            // make lines
+            SCENE.children.filter(d => d.type === "Line").forEach(el => SCENE.remove(el))
+            var centroid = [NON_ZERO_CELLS[instanceId].X, NON_ZERO_CELLS[instanceId].Y, NON_ZERO_CELLS[instanceId].Z]
+            var out = make_line(target_spots, centroid);
+            out.map(d => SCENE.add(d))
+
         }
 
         // INSTANCEDMESH.back_face.instancedMesh.material.opacity = 1.0;
@@ -263,6 +257,10 @@ function make_line(obj, centroid){
         return make_line_helper(d, centroid)
     });
     return out
+}
+
+function remove_line(){
+    SCENE.children.filter(d => d.type === "Line").forEach(el => SCENE.remove(el))
 }
 
 function make_line_helper(d, centroid) {

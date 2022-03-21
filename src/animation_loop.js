@@ -207,6 +207,27 @@ function render() {
                 HIGHLIGHTING_POINTS.forEach(d => d.name = 'glyph_highlighting');
                 HIGHLIGHTING_POINTS.map(d => SCENE.add(d));
                 PREVIOUS_CELL_LABEL = cell_label;
+
+                // make lines
+                var centroid = [NON_ZERO_CELLS[instanceId].X, NON_ZERO_CELLS[instanceId].Y, NON_ZERO_CELLS[instanceId].Z]
+                var out = make_line(target_spots, centroid);
+                out.map(d => SCENE.add(d))
+                var line_points = []
+                var _xyz = [{x: 4427, y: 3918, z:41}];
+                var xyz = _xyz.map(d => centralise_coords([d.x, d.y, d.z], CONFIGSETTINGS)).flat();
+                line_points.push(
+                    new THREE.Vector3(...xyz),
+                    new THREE.Vector3(0, 0, 0),
+                )
+                var geometry = new THREE.BufferGeometry().setFromPoints(line_points);
+                // CREATE THE LINE
+                var line = new THREE.Line(
+                    geometry,
+                    new THREE.LineBasicMaterial({
+                        color: 0x0000ff
+                    })
+                );
+                SCENE.add(line)
             }
             else{
                 SCENE.children.filter(d => d.name === 'glyph_highlighting').forEach(d => d.visible=true);
@@ -234,6 +255,33 @@ function render() {
 
     RENDERER.render(SCENE, CAMERA);
     LABEL_RENDERER.render(SCENE, CAMERA)
+}
+
+function make_line(obj, centroid){
+    var arr = Object.entries(obj).map(d => d[1]).flat()
+    var out = arr.map(d => {
+        return make_line_helper(d, centroid)
+    });
+    return out
+}
+
+function make_line_helper(d, centroid) {
+    var centre = centralise_coords([centroid[0], centroid[1], centroid[2]], CONFIGSETTINGS).flat();
+    var xyz = centralise_coords([d.x, d.y, d.z], CONFIGSETTINGS).flat();
+    var points = [];
+    points.push(
+        new THREE.Vector3(...xyz),
+        new THREE.Vector3(...centre),
+    )
+    var geometry = new THREE.BufferGeometry().setFromPoints(points);
+    // CREATE THE LINE
+    var line = new THREE.Line(
+        geometry,
+        new THREE.LineBasicMaterial({
+            color: 0x0000ff
+        })
+    );
+    return line
 }
 
 function font_ramp(z){

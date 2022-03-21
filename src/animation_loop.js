@@ -276,7 +276,7 @@ function make_line_helper(d, centroid) {
     var line = new THREE.Line(
         geometry,
         new THREE.LineBasicMaterial({
-            color: 0x0000ff
+            color: getColor(d.Gene)
         })
     );
     return line

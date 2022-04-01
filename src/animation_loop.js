@@ -230,6 +230,8 @@ function render() {
             HIGHLIGHTING_POINTS = null
             PREVIOUS_CELL_LABEL = null
 
+            donutchart(NON_ZERO_CELLS[instanceId]);
+
             // make lines
             SCENE.children.filter(d => d.type === "Line").forEach(el => SCENE.remove(el))
             var centroid = [NON_ZERO_CELLS[instanceId].X, NON_ZERO_CELLS[instanceId].Y, NON_ZERO_CELLS[instanceId].Z]

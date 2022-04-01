@@ -255,7 +255,8 @@ function glyphSettings()
         {gene: 'Fbln2', taxonomy: 'SATG', glyphSymbol: '>', specificity: 'NonNeuron', glyphName: 'triangleRight'},
         {gene: 'Ube2c', taxonomy: 'SATG', glyphSymbol: 'x', specificity: 'NonNeuron', glyphName: 'cross'},
 
-
+        {gene: 'Rgs17',         taxonomy: 'cxcl14',      glyphSymbol: 'h', specificity: 'Neuron',  glyphName: 'star6'},
+        {gene: 'Slc17a7',       taxonomy: 'cnr1',        glyphSymbol: 'h', specificity: 'Neuron',  glyphName: 'star6'},
         {gene: 'Generic',       taxonomy: 'generic',     glyphSymbol: 'o',  glyphName: 'circle'},
 
         ];

@@ -20,6 +20,7 @@ function getTaxonomy(gene) {
 }
 
 function getGlyph(gene) {
+    console.log(gene)
     return glyphSettings().filter(d => d.gene === gene)[0].glyphName
 }
 

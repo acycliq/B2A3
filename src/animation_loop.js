@@ -185,7 +185,8 @@ function render() {
     }
 
     const intersection = RAYCASTER.intersectObject(INSTANCEDMESH.front_face.instancedMesh);
-    if (intersection.length > 0) {
+    // if (intersection.length > 0) {
+    if (intersection.length < -10) { //REMOVE THIS LINE!!!!
         var instanceId = intersection[0].instanceId;
         var cell_label = NON_ZERO_CELLS[instanceId].Cell_Num;
         console.log('Hovering over cell: ' + cell_label)

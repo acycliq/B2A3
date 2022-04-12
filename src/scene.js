@@ -41,11 +41,11 @@ function iniScene() {
 
     const tooltipDiv = document.createElement('div');
     tooltipDiv.className = 'pointlabel';
-    tooltipDiv.textContent = 'Tooltip';
+    tooltipDiv.textContent = 'This is a Tooltip';
     tooltipDiv.style.marginTop = '-1em';
     TOOLTIP = new THREE.CSS2DObject(tooltipDiv);
     TOOLTIP.position.set(0, 0, 0);
-    SCENE.add(TOOLTIP);
+    // SCENE.add(TOOLTIP);
 
     LABEL_RENDERER = new THREE.CSS2DRenderer();
     LABEL_RENDERER.setSize(window.innerWidth, window.innerHeight);
@@ -59,6 +59,8 @@ function iniScene() {
 
     stats = new Stats();
     container.appendChild(stats.dom);
+
+
 
     // var axes = createAxes(1000, SCENE);
     // SCENE.add(axes)

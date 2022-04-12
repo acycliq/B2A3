@@ -48,6 +48,41 @@ function app(geneData, cellData) {
     animate();
     postScene();
 
+    var renderingParent = new THREE.Group();
+    POINTS.map(d => renderingParent.add(d));
+    renderingParent.add(INSTANCEDMESH.front_face.instancedMesh)
+
+    var resizeContainer = new THREE.Group();
+    resizeContainer.add(renderingParent);
+    SCENE.add(resizeContainer);
+
+    // Scaling animation
+    var animProps = {scale: 0.85, xRot: 0, yRot: 0};
+    gsap.to(animProps, {
+        duration: 10,
+        scale: 2.3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine",
+        onUpdate: function () {
+            renderingParent.scale.set(animProps.scale, animProps.scale, animProps.scale);
+        }
+    });
+
+    gsap.to(animProps, {
+        duration: 120,
+        xRot: Math.PI * 2,
+        yRot: Math.PI * 4,
+        zRot: 0,
+        repeat: -1,
+        yoyo: true,
+        ease: "none",
+        onUpdate: function () {
+            renderingParent.rotation.set(animProps.xRot, animProps.yRot, animProps.zRot);
+        }
+    });
+
+
 }
 
 function maxIndex(data){

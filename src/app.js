@@ -70,7 +70,7 @@ function app(geneData, cellData) {
     });
 
     gsap.to(animProps, {
-        duration: 120,
+        duration: 60,
         xRot: Math.PI * 2,
         yRot: Math.PI * 4,
         zRot: 0,

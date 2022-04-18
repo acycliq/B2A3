@@ -29,6 +29,15 @@ function postScene() {
         }
     });
 
+    nextBtn = document.querySelector('.next')
+    prevBtn = document.querySelector('.prev')
+
+    nextBtn.addEventListener('click', () => {
+        CONTROLS.nextPOI()
+        console.log('nextROI was registered')
+    })
+    prevBtn.addEventListener('click', () => CONTROLS.prevPOI())
+
     // mouse wheel
     // window.addEventListener('mousewheel', MouseWheelHandler, false);
 

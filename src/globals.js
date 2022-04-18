@@ -30,4 +30,7 @@ var CAMERA = null,
     CTRL_KEY_PRESSED = null,
     PREVIOUS_CELL_LABEL = null,
     HIGHLIGHTING_POINTS = null,
+    RIG = null,
+    nextBtn,
+    prevBtn,
     TOOLTIP = null;

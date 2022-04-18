@@ -2,8 +2,9 @@
 
 var attributes;
 
-function animate() {
+function animate(t) {
     requestAnimationFrame(animate);
+    CONTROLS.update(t)
     render();
     stats.update();
 }
@@ -85,8 +86,6 @@ function remove_highlight_sphere() {
     // restore the mouse cursor
     $('html,body').css('cursor', 'default');
 }
-
-
 
 function render() {
     RAYCASTER.setFromCamera(MOUSE, CAMERA);
@@ -188,7 +187,7 @@ function render() {
     if (intersection.length > 0) {
         var instanceId = intersection[0].instanceId;
         var cell_label = NON_ZERO_CELLS[instanceId].Cell_Num;
-        console.log('Hovering over cell: ' + cell_label)
+        // console.log('Hovering over cell label: ' + cell_label)
 
         INSTANCEDMESH.front_face.instancedMesh.visible = false;
         SCENE.children.filter(d => (d.type === 'Points') & (d.name !== 'glyph_highlighting')).forEach(d => d.visible=false);

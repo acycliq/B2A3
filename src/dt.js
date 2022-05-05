@@ -38,7 +38,7 @@ function renderDataTable(d) {
             //"scrollY":        "200px",
             //"scrollCollapse": true,
             "paging": true,
-            "pagingType": "simple",
+            // "pagingType": "simple",
             // "dom": 't',
             "bInfo": false, //Dont display info e.g. "Showing 1 to 4 of 4 entries"
             // "paging": false,//Dont want paging

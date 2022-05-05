@@ -231,6 +231,7 @@ function render() {
             PREVIOUS_CELL_LABEL = null
 
             donutchart(NON_ZERO_CELLS[instanceId]);
+            renderDataTable(NON_ZERO_CELLS[instanceId])
 
             // make lines
             SCENE.children.filter(d => d.type === "Line").forEach(el => SCENE.remove(el))

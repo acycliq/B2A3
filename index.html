@@ -41,6 +41,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.7.0/Tween.js"></script>
 
+    <!-- datatables -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
 <!--    rbush3d-->
     <script src="https://unpkg.com/rbush-3d@0.0.4/dist/rbush3d.min.js"></script>
 
@@ -70,6 +74,7 @@
     <script src="src/globals.js"></script>
     <script src="src/utils.js"></script>
     <script src="src/donut.js"></script>
+    <script src="src/dt.js"></script>
     <script src="src/glyphPaths.js"></script>
     <script src="src/glyphConfig.js"></script>
     <script src="src/classColors.js"></script>
@@ -103,6 +108,18 @@
         #my_control {
             position: absolute;
             bottom: 10px;
+            right: 10px;
+        }
+
+        #my_control_2 {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+        }
+
+        #my_control_3 {
+            position: absolute;
+            top: 10px;
             right: 10px;
         }
 
@@ -204,6 +221,38 @@
         </div>
     </div>
 </div>
+
+<div class='tab-pane active fade in' id='my_control_2'>
+    <div class='container-fluid'>
+<!--        <div class='col-sm-12'>-->
+<!--            <div class='row myTitle', id='dtTitle' style='margin-bottom:5px'>-->
+<!--                <h4>Highlighted Cell</h4>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class='row' style='background-color: rgba(255, 255, 255, 0.0)'>
+            <div class='chart-wrapper'>
+                <div class='chart-stage'>
+                    <div class='col-sm-12'>
+                        <div class='chart-stage' style='background-color: rgba(255, 255, 255, 0.8)'>
+                            <table id='dtTable' class='display compact custom' data-page-length='5' width=100%></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class='tab-pane active fade in' id='my_control_3'>
+    <div class='container-fluid'>
+        <div class='col-sm-12'>
+            <div class='row myTitle', id='dtTitle' style='margin-bottom:5px'>
+                <h4>Highlighted Cell</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <canvas class="webgl"></canvas>

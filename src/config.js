@@ -7,8 +7,8 @@ function config() {
             img_depth: 15 * 6.0121,
             particle_size: 8000.0,
             // zThres: 1500.0,
-            geneData: 'https://www.googleapis.com/storage/v1/b/dxn_temp/o/without_single_page_cells/geneData.tsv',
-            cellData: 'https://www.googleapis.com/storage/v1/b/dxn_temp/o/without_single_page_cells/cellData.tsv',
+            geneData: [{mediaLink: './data/geneData.tsv', size: "65755002"}],
+            cellData: [{mediaLink: './data//cellData.tsv', size: "10554015"}],
         },
     ];
     return d3.map(ini, function (d) {return d.name;})

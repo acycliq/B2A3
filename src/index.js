@@ -2,8 +2,10 @@
 function run() {
     console.log('app starts');
     CONFIGSETTINGS = config().get('default');
+    CONFIGSETTINGS.cellData[0]["name"] = "cellData";
+    CONFIGSETTINGS.geneData[0]["name"] = "geneData";
 
-    fetcher([encode(CONFIGSETTINGS.geneData), encode(CONFIGSETTINGS.cellData)]).then(
+    fetcher([CONFIGSETTINGS.geneData, CONFIGSETTINGS.cellData]).then(
         result => make_package(result),
         error => alert(error) // doesn't run
     );
@@ -12,7 +14,8 @@ function run() {
 
 const fetcher = (filenames) => {
     return Promise.all(
-        filenames.map(d => fetch(d).then(res => res.json()))
+        filenames.map(d => d[0])
+        // filenames.map(d => fetch(d).then(res => res.json()))
     )
 };
 

@@ -279,7 +279,8 @@ function make_line_helper(d, centroid) {
     var line = new THREE.Line(
         geometry,
         new THREE.LineBasicMaterial({
-            color: getColor(d.Gene)
+            // color: getColor(d.Gene)
+            color: GLYPH_MAP.get(d.Gene).color
         })
     );
     return line

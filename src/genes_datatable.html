@@ -51,7 +51,7 @@
     $(document).ready(function () {
         var gene_panel = JSON.parse(sessionStorage.getItem('gene_panel'));
         var legendData = glyphSettings().filter(d => gene_panel.includes(d.gene))
-          .map((d,i) => {return [i, d.gene, d.specificity, d.glyphName, glyphColor(d.taxonomy)]});
+          .map((d,i) => {return [i, d.gene, d.specificity, d.glyphName, d.color]});
         table = $('#example').DataTable({
             'data': legendData,
             'columnDefs': [

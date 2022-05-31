@@ -1,10 +1,13 @@
+GLYPH_MAP = d3.map(glyphSettings(), function (d) {return d.gene; });
+
 function my_particles(positions, gene, hexCode=null) {
     // positions = positions.slice(0, 3);
     console.log('Doing particles for ' + gene);
 
     var glyph = getGlyph(gene);
     if (!hexCode){
-        hexCode = getColor(gene);
+        // hexCode = getColor(gene);
+        hexCode = GLYPH_MAP.get(gene).color
     }
 
 

@@ -104,22 +104,28 @@ function iniScene() {
         },
         {
             cell_num: 3780,
-            phi: deg2rad(60),
-            theta: deg2rad(190),
-            rho: 5000,
-        },
-        {
-            cell_num: 3780,
-            phi: deg2rad(60),
-            theta: deg2rad(190),
+            phi: deg2rad(120),
+            theta: deg2rad(40),
             rho: 1000,
         },
-        {
-            cell_num: 1291,
-            phi: deg2rad(90), // angle between x and the projection of radious on xy
-            theta: deg2rad(-40), // angle between radious and z
-            rho: 1000,
-        },
+        // {
+        //     cell_num: 3780,
+        //     phi: deg2rad(60),
+        //     theta: deg2rad(190),
+        //     rho: 35000,
+        // },
+        // {
+        //     cell_num: 3780,
+        //     phi: deg2rad(60),
+        //     theta: deg2rad(190),
+        //     rho: 1000,
+        // },
+        // {
+        //     cell_num: 1291,
+        //     phi: deg2rad(90), // angle between x and the projection of radious on xy
+        //     theta: deg2rad(-40), // angle between radious and z
+        //     rho: 1000,
+        // },
         // {
         //     cell_num: 523,
         //     phi: Math.PI * 0.5,

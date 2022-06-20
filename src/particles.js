@@ -17,9 +17,9 @@ function my_particles(positions, gene, hexCode=null) {
     var colors = new Float32Array(positions.length);
     for (let i = 0; i < positions.length; i += 3) {
         sizes[i/3] = CONFIGSETTINGS.particle_size;
-        colors[i] = color.r;
-        colors[i + 1] = color.g;
-        colors[i + 2] = color.b;
+        colors[i] = color.r / 255.0;
+        colors[i + 1] = color.g / 255.0;
+        colors[i + 2] = color.b / 255.0;
     }
 
     // const mypositions = new Float32Array([0,0,1.5]) ;

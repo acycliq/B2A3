@@ -2,10 +2,9 @@
 function run() {
     console.log('app starts');
     CONFIGSETTINGS = config().get('default');
-    CONFIGSETTINGS.cellData[0]["name"] = "cellData";
     CONFIGSETTINGS.geneData[0]["name"] = "geneData";
 
-    fetcher([CONFIGSETTINGS.geneData, CONFIGSETTINGS.cellData]).then(
+    fetcher([CONFIGSETTINGS.geneData]).then(
         result => make_package(result),
         error => alert(error) // doesn't run
     );

@@ -39,7 +39,7 @@ function postScene() {
     legendControl();
 
     //
-    populate_jstree()
+//    populate_jstree()
 
     function onMouseMove(event) {
         // calculate mouse position in normalized device coordinates

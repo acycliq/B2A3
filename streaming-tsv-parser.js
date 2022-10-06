@@ -3,6 +3,9 @@ function json_parse(d) {
         // Add the reasoning for this ASAP cause I will forget it in a month's time
         return null
     }
+    if (d.endsWith('\r')) {
+        d = d.replace('\r', '')
+    }
     try {
         return JSON.parse(d.replace(/'/g, '"'))
     } catch {

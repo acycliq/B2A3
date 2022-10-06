@@ -64,7 +64,8 @@ const tsvChunkedParser = () => {
 
 const fetchExternalData = (data) => {
     // the input data is actually the workpackage
-    var filenames = data.map(d => d.download_url);
+    var filenames = data.map(d => d.mediaLink);
+//    var filenames = data.map(d => d.download_url);
     return Promise.all(
         // filenames.forEach(d => d.map(el => fetch(el)))
         filenames.map(d => fetch(d))

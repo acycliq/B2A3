@@ -9,23 +9,27 @@ function postScene() {
     window.addEventListener('mousemove', onMouseMove, false);
 
     document.addEventListener('keydown', (event) => {
-        console.log(event); // all event related info
-        console.log(event.type);
-        console.log(event.key);
-        console.log(event.code);
-        if (event.ctrlKey){
-            CTRL_KEY_PRESSED = true
+        // console.log(event); // all event related info
+        // console.log("keydown event type: " + event.type);
+        console.log("keydown event key " + event.key);
+        // console.log("keydown event code" + event.code);
+        if (event.key === "ArrowRight"){
+            nextPage()
         }
+        if (event.key === "ArrowLeft"){
+            previousPage()
+        }
+
     });
 
     document.addEventListener('keyup', (event) => {
-        console.log(event); // all event related info
-        console.log(event.type);
-        console.log(event.key);
-        console.log(event.code);
+        // console.log(event); // all event related info
+        // console.log("keyup event type: " + event.type);
+        // console.log("keyup event key " + event.key);
+        // console.log("keyup event code" + event.code);
         if (!event.ctrlKey){
-            console.log('CTRL UP')
-            CTRL_KEY_PRESSED = false
+            // console.log('CTRL UP')
+            // CTRL_KEY_PRESSED = false
         }
     });
 
@@ -54,7 +58,7 @@ function postScene() {
         CAMERA.aspect = window.innerWidth / window.innerHeight;
         CAMERA.updateProjectionMatrix();
 
-        // Update renderer
+        // update renderer
         RENDERER.setSize(window.innerWidth, window.innerHeight);
         RENDERER.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     }

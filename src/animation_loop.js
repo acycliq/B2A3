@@ -188,7 +188,9 @@ function render() {
     if (intersection.length > 0) {
         var instanceId = intersection[0].instanceId;
         var cell_label = NON_ZERO_CELLS[instanceId].Cell_Num;
-        console.log('Hovering over cell: ' + cell_label)
+        if (instanceId != PREV_INSTANCE_ID) {
+            console.log('Hovering over cell: ' + cell_label)
+        }
 
         INSTANCEDMESH.front_face.instancedMesh.visible = false;
         SCENE.children.filter(d => (d.type === 'Points') & (d.name !== 'glyph_highlighting')).forEach(d => d.visible=false);
@@ -225,13 +227,15 @@ function render() {
         }
         else{
             INSTANCEDMESH.front_face.instancedMesh.visible = true;
-            SCENE.children.filter(d => d.type === 'Points').forEach(d => d.visible=true)
+            SCENE.children.filter(d => d.type === 'Points').forEach(d => d.visible = true)
             SCENE.children.filter(d => d.name === 'glyph_highlighting').forEach(d => SCENE.remove(d));
             HIGHLIGHTING_POINTS = null
             PREVIOUS_CELL_LABEL = null
 
-            donutchart(NON_ZERO_CELLS[instanceId]);
-            renderDataTable(NON_ZERO_CELLS[instanceId])
+            if (instanceId != PREV_INSTANCE_ID) {
+                donutchart(NON_ZERO_CELLS[instanceId]);
+                renderDataTable(NON_ZERO_CELLS[instanceId])
+            }
 
             // make lines
             SCENE.children.filter(d => d.type === "Line").forEach(el => SCENE.remove(el))

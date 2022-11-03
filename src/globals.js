@@ -1,12 +1,13 @@
 // variables in the global scope
 var CAMERA = null,
     SCENE = null,
+    CLOCK = new THREE.Clock(),
     RENDERER = null,
     LABEL_RENDERER = null,
     CONTROLS = null,
     CANVAS = null,
     ALL_GENEDATA = null,
-            CELL_DATA,
+    CELL_DATA,
     NON_ZERO_CELLS = null,
     DEMO_CELLS_ARR = [],
     SPOTS_ARR = [],
@@ -33,5 +34,6 @@ var CAMERA = null,
     INSTANCE_MATRICES = [],
     CELL_MESH = null,
     TOPCLASSES = null,
-    SPOT_COUNTS = [];
+    SPOT_COUNTS = [],
+    PREV_INSTANCE_ID = null,
     TOOLTIP = null;

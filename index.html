@@ -54,7 +54,8 @@
     <script src="https://unpkg.com/three@0.139.0/build/three.min.js"></script>
     <script src="https://threejs.org/examples/js/renderers/CSS2DRenderer.js"></script>
     <script src="https://threejs.org/examples/js/loaders/RGBELoader.js"></script>
-    <script src='https://threejs.org/examples/js/controls/OrbitControls.js'></script>
+<!--    <script src='https://threejs.org/examples/js/controls/OrbitControls.js'></script>-->
+    <script src="https://unpkg.com/camera-controls@1.36.1/dist/camera-controls.min.js"></script>
 <!--    <script src="three.js/examples/js/libs/dat.gui.min.js"></script>-->
 <!--    <script src="three.js/examples/js/libs/stats.min.js"></script>-->
     <script type="text/javascript" src="https://cdn.rawgit.com/dataarts/dat.gui/master/build/dat.gui.min.js"></script>
@@ -94,6 +95,9 @@
     <script src="src/animation_loop.js"></script>
     <script src="src/post_scene.js"></script>
 
+    <script>
+        CameraControls.install( { THREE } );
+    </script>
     <style>
         button, input, optgroup, select, textarea {color: #1b1b1b;}
 

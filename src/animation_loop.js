@@ -3,8 +3,12 @@
 var attributes;
 
 function animate() {
+    const delta = CLOCK.getDelta();
+    const hasControlsUpdated = CONTROLS.update( delta );
     requestAnimationFrame(animate);
-    render();
+    if ( hasControlsUpdated ) {
+        render();
+    }
     // stats.update();
 }
 

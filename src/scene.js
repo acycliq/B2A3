@@ -2,6 +2,7 @@ function iniScene() {
 
     // Canvas
     CANVAS = document.querySelector('canvas.webgl')
+    CLOCK = new THREE.Clock();
 
     var container = document.createElement('div');
     document.body.appendChild(container);
@@ -54,8 +55,10 @@ function iniScene() {
     document.body.appendChild(LABEL_RENDERER.domElement);
 
     // Controls
-    CONTROLS = new THREE.OrbitControls(CAMERA, LABEL_RENDERER.domElement);
-    // controls.enableDamping = true;
+    // CONTROLS = new THREE.OrbitControls(CAMERA, LABEL_RENDERER.domElement);
+    CONTROLS = new CameraControls(CAMERA, LABEL_RENDERER.domElement);
+    CONTROLS.dollyToCursor = true
+    CONTROLS.enableDamping = true;
 
     // stats = new Stats();
     // container.appendChild(stats.dom);

@@ -56,9 +56,17 @@ function app(geneData, cellData) {
     // RAYCASTER.params.Points.threshold = 3;
     // window.addEventListener('mousemove', onMouseMove, false);
 
+    ini_draw();
     animate();
     postScene();
 
+}
+
+function ini_draw(){
+    // renders the scene once, on the first load. Then the scene is rendered only when
+    // the controls have been updated (ie when you zoom in/out or rotate etc...)
+    RENDERER.render(SCENE, CAMERA);
+    LABEL_RENDERER.render(SCENE, CAMERA)
 }
 
 function maxIndex(data){

@@ -229,7 +229,7 @@ function render() {
             HIGHLIGHTING_POINTS = null
             PREVIOUS_CELL_LABEL = null
 
-            donutchart(NON_ZERO_CELLS[instanceId]);
+            // donutchart(NON_ZERO_CELLS[instanceId]);
 
             // make lines
             SCENE.children.filter(d => d.type === "Line").forEach(el => SCENE.remove(el))

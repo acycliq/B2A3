@@ -53,9 +53,9 @@ function my_particles(positions, gene, hexCode=null) {
             u_resolution: {value: new THREE.Vector2(window.innerWidth, window.innerHeight)},
             zThres: {value: 1000},
             attenuate: {value: true},
-            r: {value: color.r / 255.0},
-            g: {value: color.g / 255.0},
-            b: {value: color.b / 255.0},
+            // r: {value: color.r / 255.0},
+            // g: {value: color.g / 255.0},
+            // b: {value: color.b / 255.0},
             a: {value: opacity}
         }
     });

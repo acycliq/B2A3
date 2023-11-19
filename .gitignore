@@ -1,4 +1,17 @@
+/node_modules/
+/build/
+/.idea/
 
-.idea
-.xml
+/py/cellData/
 
+
+/py/cellData.ipynb
+/py/.ipynb_checkpoints/cellData-checkpoint.ipynb
+/.ipynb_checkpoints/cellData_rgb_2-checkpoint.tsv
+/classConfig2.js
+/.ipynb_checkpoints/classConfig2-checkpoint.js
+/colour_scheme.csv
+/py/colour_scheme.ipynb
+/py/.ipynb_checkpoints/colour_scheme-checkpoint.ipynb
+/.ipynb_checkpoints/how_to_make_cellData_rgb.tsv-checkpoint.ipynb
+/py/.ipynb_checkpoints/Untitled-checkpoint.ipynb
